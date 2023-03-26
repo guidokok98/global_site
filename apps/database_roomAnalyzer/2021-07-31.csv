@@ -1,0 +1,3 @@
+date,timeStamp,temperature,outside temperature,humidity,pressure,gasResistance,bsec  breath_voc_equivalent ,bsec  raw_humidity,bsec bsec_status,bsec co2_equivalent,bsec gas,bsec humidity,bsec iaq,bsec iaq_accuracy,bsec pressure,bsec raw_temperature,bsec static_iaq,bsec temperature
+2021-07-31,13:42:56,20.38,18.55,61.615,1009.14,200856.01992433995,0.943773,61.615002,0.0,670.256226,196275.0,71.832344,95.264282,0.0,100914.0,22.379999,67.02562,22.315292
+2021-07-31,16:33:19,21.51,19.65,56.85,1009.98,140904.5182182566,0.941307,57.063999,0.0,668.525513,136640.0,66.634415,95.142853,0.0,100994.0,23.440001,66.852554,23.375282
