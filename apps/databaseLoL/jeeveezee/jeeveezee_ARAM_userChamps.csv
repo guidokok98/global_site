@@ -1,0 +1,4 @@
+champion_id,champion_name,played,won,kills,deaths,assists,average_damage_dealt,average_damage_taken,damage_diff,double_kills,triple_kills,quadra_kills,penta_kills,unreal_kills,average_healing_done,cc_score,winrate
+164,Camille,1.0,1,2,12,18,12242,25546,-13304,0,0,0,0,0,2790,10,100
+9,Fiddlesticks,1.0,0,13,11,25,48479,31599,16880,0,0,0,0,0,2544,9,0
+30,Karthus,1.0,0,18,14,31,39084,38189,895,2,1,0,0,0,12103,3,0

@@ -1,0 +1,4 @@
+champion_id,champion_name,played_with,won_with,played_against,lost_against,winrate,tot_played
+42,Corki,1.0,1,0,0,100,1
+115,Ziggs,0.0,0,1,1,100,1
+888,Renata,1.0,0,0,0,0,1

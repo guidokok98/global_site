@@ -199,7 +199,7 @@ void output_ready(int64_t timestamp, float iaq, uint8_t iaq_accuracy,
   struct tm tm = *localtime(&t);
 
   FILE *fptr;
-  fptr = fopen("/home/pi/global_site/apps/database_roomAnalyzer/bsec/bsec_data.csv","w");
+  fptr = fopen("/home/pi/repos/global_site/apps/database_roomAnalyzer/bsec/bsec_data.csv","w");
   
   fprintf(fptr, "bsec_status,iaq,iaq_accuracy,temperature,humidity,pressure,raw_temperature, raw_humidity,gas,static_iaq,co2_equivalent, breath_voc_equivalent \n");
   fprintf(fptr,"%d",bsec_status);
