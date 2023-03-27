@@ -330,7 +330,6 @@ gasRes = bme680.getGasRes()
 
 while 1:
     timeDate, timeHMS = convTimeStamp()
-    df = openDatabase(path, timeDate)
     dfParam = openDatabase(path, 'parameters')
     pathLoc = path+dfParam['location']
     row = {}
@@ -357,6 +356,8 @@ while 1:
         dfBsec = openDatabase((path+'/bsec/'), 'bsec_data')
         for val in dfBsec:
             row['bsec '+val] = dfBsec[val][0]
+        
+        df = openDatabase(pathLoc, timeDate)
         df = df.append(row, ignore_index=True)
         closeDatabase(df,pathLoc, timeDate)
     time.sleep(dfParam['time interval'][0]*60)
