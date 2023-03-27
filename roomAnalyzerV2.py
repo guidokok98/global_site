@@ -291,7 +291,6 @@ def openDatabase(path, name):
     return df
 #saves the database into csv
 def closeDatabase(df, path, name):
-        print('path: .', path+'/'+name+'.csv')
         df.to_csv(path+'/'+name+'.csv', index=False)
 
 
@@ -332,7 +331,7 @@ gasRes = bme680.getGasRes()
 while 1:
     timeDate, timeHMS = convTimeStamp()
     dfParam = openDatabase(path, 'parameters')
-    pathLoc = path+dfParam['location'][0]
+    pathLoc = path+'/'+dfParam['location'][0]
     row = {}
     bme680.setBitHigh(0x74, 0)
     while((bme680.readReg(0x1D)&0b100000) == 1):
