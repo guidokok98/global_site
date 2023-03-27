@@ -73,7 +73,7 @@ def chkCO2(val):
             return co2Dict
 #selects the data of past given hours
 def readCSV(tempDf, dfName):
-    file = path+'/'+dfName+'.csv'
+    file = pathLoc+'/'+dfName+'.csv'
     try:
         tempDf = pd.read_csv(file)
     except:
@@ -125,8 +125,8 @@ def selectTimeFrame(hoursBack):
     selection = pd.DataFrame()
     #calculates on which date and time to begin
     beginTimeDate, beginTimeHMS = getTimeDate(hoursBack)
-    for file in sorted(os.listdir(path)):
-        file_path = f'{path}/{file}'
+    for file in sorted(os.listdir(pathLoc)):
+        file_path = f'{pathLoc}/{file}'
         if os.path.isfile(file_path) and file.endswith(".csv"):
             fileName = file.split('.')[0]
             if len(fileName.split('-')) == 3:
@@ -135,6 +135,7 @@ def selectTimeFrame(hoursBack):
                     selection = addFromTimeStamp(selection,fileName, beginTimeHMS)
                 elif fileDate > beginTimeDate:
                     selection = addDf(selection,fileName)
+                    
     selection = selection.reset_index(drop=True)
     selection = selection.sort_values(by=['date','timeStamp'], ascending=True) 
     return selection
@@ -145,8 +146,8 @@ def selectDate(dateBegin, dateEnd = -1):
     dateBeginInt = date2int(dateBegin)
     dateEndInt = date2int(dateEnd)
     selection = pd.DataFrame()
-    for file in sorted(os.listdir(path)):
-        file_path = f'{path}/{file}'
+    for file in sorted(os.listdir(pathLoc)):
+        file_path = f'{pathLoc}/{file}'
         if os.path.isfile(file_path) and file.endswith(".csv"):
             fileName = file.split('.')[0]
             if len(fileName.split('-')) == 3:
@@ -182,19 +183,27 @@ def calcTwoLinesDt(tempDf, keep):
 #load the begin data in
 path = str(Path(__file__).parent.absolute())+"/database_roomAnalyzer"
 startDate = time.strftime('%Y-%m-%d', time.localtime(time.time()))
-file = path+'/'+startDate+'.csv'
-try:
-    df = pd.read_csv(path+'/'+startDate+'.csv')
-except:
-    df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'pressure','gasResistance'])
 #update starting values for temperature compensation and measurement interval
 try:
     dfParam = pd.read_csv(path+'/parameters.csv')
     tempCompStart = dfParam['temperature compensation'][0]
     timeIntervalStart = dfParam['time interval'][0]
+    location = dfParam['location'][0]
 except:
-    tempCompStart = 1
+    tempCompStart = -2
     timeIntervalStart = 5
+    location = "home"
+
+pathLoc = path+'/'+location
+if os.path.isdir(pathLoc) == False:
+    os.mkdir(pathLoc)
+
+file = pathLoc+'/'+startDate+'.csv'
+try:
+    df = pd.read_csv(file)
+except:
+    df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'pressure','gasResistance'])
+
 
 #define the app
 layout = html.Div(children=[
@@ -221,6 +230,10 @@ layout = html.Div(children=[
                                             html.Br(),
                                             html.Div([html.Span("Measurement interval (min): ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
                                             dcc.Input(id='time-interval', value=str(timeIntervalStart), type='number', style={'width': '15%', 'float': 'right'})]),
+                                            html.Br(),
+                                            html.Div([html.Span("Location: ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
+                                            dcc.Input(id='cur-location', value=str(location), type='text', style={'width': '15%', 'float': 'right'})]),
+
                                             html.Button(id='update-button', n_clicks=0, children='Update', style={'color': 'white', 'float': 'middle'}),
                                             html.Div(id='update-txt')
 
@@ -404,6 +417,14 @@ def update_timeInter(value):
     timeIntervalStart = dfParam['time interval'][0]
     return timeIntervalStart
 
+
+#update time interval field
+@app.callback(Output('cur-location', 'text'),
+             Input('update-txt', 'children'))
+def update_timeInter(value):
+    dfParam = pd.read_csv(path+'/parameters.csv')
+    location = dfParam['location'][0]
+    return location
 #saves the database into csv
 def closeDatabase(df, path, name):
         df.to_csv(path+'/'+name+'.csv', index=False)
@@ -412,11 +433,13 @@ def closeDatabase(df, path, name):
               Input('update-button', 'n_clicks'),
               State('temp-comp', 'value'),
               State('time-interval', 'value'),
+              State('cur-location', 'text'),
               prevent_initial_call=True)
 
-def update_preferences(n_clicks, tempComp, timeInt):
+def update_preferences(n_clicks, tempComp, timeInt, setLoc):
     global tempCompStart
     global timeIntervalStart
+    global location
     timeInt = float(timeInt)
     df = pd.DataFrame()
     row = {}
@@ -424,8 +447,11 @@ def update_preferences(n_clicks, tempComp, timeInt):
         timeInt = 0.01
     row['temperature compensation'] = tempComp
     row['time interval'] = timeInt
+    row['location'] = setLoc
     tempCompStart = tempComp
     timeIntervalStart = timeInt
+    location = setLoc
+    print('setLoc: ', setLoc)
     df = df.append(row, ignore_index=True)
     closeDatabase(df,path, 'parameters')
     return [html.Span('Updated {} times'.format(n_clicks), style={'color': 'white'})]

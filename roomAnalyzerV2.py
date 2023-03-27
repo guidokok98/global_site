@@ -282,8 +282,9 @@ def openDatabase(path, name):
         if name == "parameters":
             print('parameters selected')
             df = pd.DataFrame(columns=['temperature compensation', 'time interval'])
-            row['temperature compensation'] = -5.
+            row['temperature compensation'] = -2.
             row['time interval'] = 5.
+            row['location'] = 'home'
             df = df.append(row, ignore_index=True)
         else:
             df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'pressure','gasResistance'])
@@ -331,6 +332,7 @@ while 1:
     timeDate, timeHMS = convTimeStamp()
     df = openDatabase(path, timeDate)
     dfParam = openDatabase(path, 'parameters')
+    pathLoc = path+dfParam['location']
     row = {}
     bme680.setBitHigh(0x74, 0)
     while((bme680.readReg(0x1D)&0b100000) == 1):
@@ -356,7 +358,7 @@ while 1:
         for val in dfBsec:
             row['bsec '+val] = dfBsec[val][0]
         df = df.append(row, ignore_index=True)
-        closeDatabase(df,path, timeDate)
+        closeDatabase(df,pathLoc, timeDate)
     time.sleep(dfParam['time interval'][0]*60)
 
 
