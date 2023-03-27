@@ -291,6 +291,7 @@ def openDatabase(path, name):
     return df
 #saves the database into csv
 def closeDatabase(df, path, name):
+        print('path: ', path+'/'+name+'.csv')
         df.to_csv(path+'/'+name+'.csv', index=False)
 
 
