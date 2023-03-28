@@ -188,13 +188,13 @@ try:
     dfParam = pd.read_csv(path+'/parameters.csv')
     tempCompStart = dfParam['temperature compensation'][0]
     timeIntervalStart = dfParam['time interval'][0]
-    location = dfParam['location'][0]
+    locationStart = dfParam['location'][0]
 except:
     tempCompStart = -2
     timeIntervalStart = 5
-    location = "home"
+    locationStart = 'home'
 
-pathLoc = path+'/'+location
+pathLoc = path+'/'+str(locationStart)
 if os.path.isdir(pathLoc) == False:
     os.mkdir(pathLoc)
 
@@ -225,14 +225,19 @@ layout = html.Div(children=[
                                             html.Div(id='cur-gasRes'),
                                             html.Br(),
                                             html.Div([
-                                            html.Span("Temperature compensation (°C): ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
-                                            dcc.Input(id='temp-comp', value=str(tempCompStart), type='number', style={'width': '15%', 'float': 'right'})]),
+                                                html.Span("Temperature compensation (°C): ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
+                                                dcc.Input(id='temp-comp', value=str(tempCompStart), type='number', style={'width': '15%', 'float': 'right'})
+                                            ]),
                                             html.Br(),
-                                            html.Div([html.Span("Measurement interval (min): ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
-                                            dcc.Input(id='time-interval', value=str(timeIntervalStart), type='number', style={'width': '15%', 'float': 'right'})]),
+                                            html.Div([
+                                                html.Span("Measurement interval (min): ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
+                                                dcc.Input(id='time-interval', value=str(timeIntervalStart), type='number', style={'width': '15%', 'float': 'right'})    
+                                            ]),
                                             html.Br(),
-                                            html.Div([html.Span("Location: ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
-                                            dcc.Input(id='cur-location', value=str(location), type='text', style={'width': '15%', 'float': 'right'})]),
+                                            html.Div([
+                                                html.Span("Location: ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
+                                                dcc.Input(id='cur-location', value=str(locationStart), type='text', style={'width': '15%', 'float': 'right'})
+                                            ]),
 
                                             html.Button(id='update-button', n_clicks=0, children='Update', style={'color': 'white', 'float': 'middle'}),
                                             html.Div(id='update-txt')
@@ -320,6 +325,8 @@ layout = html.Div(children=[
               )
 def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, dateBegin, dateEnd):
     global df
+    global locationStart
+    print("update_graph loc: ", locationStart)
     if type(dateBegin) == str:    
         df = selectDate(dateBegin,dateEnd)
     else:
@@ -403,16 +410,20 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
     return fig
 
 @app.callback(Output('temp-comp', 'value'),
-              Input('update-txt', 'children'))
-def update_tempComp(value):
+              Input('update-txt', 'children'),
+              Input('interval-component', 'n_intervals'))
+def update_tempComp(value, n):
+    global tempCompStart
     dfParam = pd.read_csv(path+'/parameters.csv')
     tempCompStart = dfParam['temperature compensation'][0]
     return tempCompStart
 
 #update time interval field
 @app.callback(Output('time-interval', 'value'),
-             Input('update-txt', 'children'))
-def update_timeInter(value):
+             Input('update-txt', 'children'),
+             Input('interval-component', 'n_intervals'))
+def update_timeInter(value, n):
+    global timeIntervalStart
     dfParam = pd.read_csv(path+'/parameters.csv')
     timeIntervalStart = dfParam['time interval'][0]
     return timeIntervalStart
@@ -420,11 +431,14 @@ def update_timeInter(value):
 
 #update time interval field
 @app.callback(Output('cur-location', 'text'),
-             Input('update-txt', 'children'))
-def update_timeInter(value):
+             Input('update-txt', 'children'),
+             Input('interval-component', 'n_intervals'))
+def update_timeLoc(value, n):
+    global locationStart
     dfParam = pd.read_csv(path+'/parameters.csv')
-    location = dfParam['location'][0]
-    return location
+    locationStart = dfParam['location'][0]
+    print("trigger update loc and return: ", locationStart)
+    return locationStart
 #saves the database into csv
 def closeDatabase(df, path, name):
         df.to_csv(path+'/'+name+'.csv', index=False)
@@ -433,25 +447,35 @@ def closeDatabase(df, path, name):
               Input('update-button', 'n_clicks'),
               State('temp-comp', 'value'),
               State('time-interval', 'value'),
-              State('cur-location', 'text'),
+              State('cur-location', 'value'),
               prevent_initial_call=True)
 
-def update_preferences(n_clicks, tempComp, timeInt, setLoc):
+def update_preferences(n_clicks, tempComp, timeInt, location):
     global tempCompStart
     global timeIntervalStart
-    global location
-    timeInt = float(timeInt)
+    global locationStart
+
+    
     df = pd.DataFrame()
     row = {}
     if timeInt <=0.:
         timeInt = 0.01
     row['temperature compensation'] = tempComp
     row['time interval'] = timeInt
-    row['location'] = setLoc
+    row['location'] = location
+    
     tempCompStart = tempComp
     timeIntervalStart = timeInt
-    location = setLoc
-    print('setLoc: ', setLoc)
+    locationStart = location
+    timeInt = float(timeInt)
+    
+    pathLoc = path+'/'+str(locationStart)
+    if os.path.isdir(pathLoc) == False:
+        os.mkdir(pathLoc)
+        
+    print('location: ', location)
+    print('tempComp: ', tempComp)
+    print('timeInt: ', timeInt)
     df = df.append(row, ignore_index=True)
     closeDatabase(df,path, 'parameters')
     return [html.Span('Updated {} times'.format(n_clicks), style={'color': 'white'})]
@@ -481,9 +505,8 @@ def update_lastUpdate(n):
 def update_lastUpdate(n):
     global df
     time = df['timeStamp'][df.shape[0]-1]
-    date = df['date'][df.shape[0]-1]
     style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}
-    return [html.Span('Last updated: {}, {}'.format(time,date), style = style)]
+    return [html.Span('Last updated: {}'.format(time), style = style)]
 
 @app.callback(Output('cur-temp', 'children'),
               Input('live-update-graph', 'figure'))
