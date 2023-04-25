@@ -15,6 +15,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 #multipage app
 from app import app
+global locationStart
 #the confort borders for humidity and temperature
 humiBorder = [30.,50.]
 tempBorder = [18.,22.]
@@ -36,8 +37,8 @@ iaqAccTab = {0: 'Stabilizing',
              3: 'Calibrated'}
 #lookup table for the different co2 ranges
 co2Tab = pd.DataFrame([ #https://www.kane.co.uk/knowledge-centre/what-are-safe-levels-of-co-and-co2-in-rooms
-                    [250.,400.,'Normal outdoor', 'green'],
-                    [400.,1000.,'Normal indoor', 'darkgreen'],
+                    [0.,400.,'Normal outdoor', 'green'],
+                    [400.,1000.,'Normal indoor, good air', 'darkgreen'],
                     [1000.,2000.,'Complaints of drowsiness and poor air', 'yellow'],
                     [2000.,5000.,'Headaches, sleepiness and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate and slight nausea may also be present.', 'red'],
                     [5000.,40000.,'Workplace exposure limit (as 8-hour TWA) in most jurisdictions.', 'purple'],
@@ -73,7 +74,9 @@ def chkCO2(val):
             return co2Dict
 #selects the data of past given hours
 def readCSV(tempDf, dfName):
+    global pathLoc
     file = pathLoc+'/'+dfName+'.csv'
+    print('open following: ', file)
     try:
         tempDf = pd.read_csv(file)
     except:
@@ -122,6 +125,7 @@ def mergeDf(df1, df2):
     return mergedDf
 
 def selectTimeFrame(hoursBack):
+    global pathLoc
     selection = pd.DataFrame()
     #calculates on which date and time to begin
     beginTimeDate, beginTimeHMS = getTimeDate(hoursBack)
@@ -141,6 +145,7 @@ def selectTimeFrame(hoursBack):
     return selection
 
 def selectDate(dateBegin, dateEnd = -1):
+    global pathLoc
     if type(dateEnd) != str:
         dateEnd = dateBegin
     dateBeginInt = date2int(dateBegin)
@@ -204,7 +209,7 @@ try:
 except:
     df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'pressure','gasResistance'])
 
-
+print("loading done. pathLoc: ", pathLoc)
 #define the app
 layout = html.Div(children=[
                       html.Div(className='row',  # Define the row element
@@ -326,7 +331,8 @@ layout = html.Div(children=[
 def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, dateBegin, dateEnd):
     global df
     global locationStart
-    print("update_graph loc: ", locationStart)
+    global pathLoc
+    print(" ===== \n update_graph loc: ", locationStart, ' pathLoc: ', pathLoc, '\n =====')
     if type(dateBegin) == str:    
         df = selectDate(dateBegin,dateEnd)
     else:
@@ -435,9 +441,10 @@ def update_timeInter(value, n):
              Input('interval-component', 'n_intervals'))
 def update_timeLoc(value, n):
     global locationStart
+    global pathLoc
     dfParam = pd.read_csv(path+'/parameters.csv')
     locationStart = dfParam['location'][0]
-    print("trigger update loc and return: ", locationStart)
+    print("trigger update loc and return: ", locationStart, 'path: ', pathLoc)
     return locationStart
 #saves the database into csv
 def closeDatabase(df, path, name):
@@ -454,7 +461,7 @@ def update_preferences(n_clicks, tempComp, timeInt, location):
     global tempCompStart
     global timeIntervalStart
     global locationStart
-
+    global pathLoc
     
     df = pd.DataFrame()
     row = {}
@@ -468,12 +475,11 @@ def update_preferences(n_clicks, tempComp, timeInt, location):
     timeIntervalStart = timeInt
     locationStart = location
     timeInt = float(timeInt)
-    
-    pathLoc = path+'/'+str(locationStart)
+    print('pathLoc old: ', pathLoc)
+    pathLoc = path+'/'+str(location)
     if os.path.isdir(pathLoc) == False:
         os.mkdir(pathLoc)
-        
-    print('location: ', location)
+    print('pathLoc new: ', pathLoc)
     print('tempComp: ', tempComp)
     print('timeInt: ', timeInt)
     df = df.append(row, ignore_index=True)
