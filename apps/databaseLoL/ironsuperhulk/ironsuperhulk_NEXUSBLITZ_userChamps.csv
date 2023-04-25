@@ -1,0 +1,5 @@
+champion_id,champion_name,played,won,kills,deaths,assists,average_damage_dealt,average_damage_taken,damage_diff,double_kills,triple_kills,quadra_kills,penta_kills,unreal_kills,average_healing_done,winrate
+235,Senna,2.0,2,17,7,29,16778,14682,2096,2,2,0,0,0,9976,100
+254,Vi,1.0,1,5,2,10,13035,14863,-1828,0,0,0,0,0,6850,100
+79,Gragas,2.0,1,7,9,20,16328,26144,-9816,0,0,0,0,0,11609,50
+25,Morgana,1.0,0,0,11,18,9666,31204,-21538,0,0,0,0,0,9049,0
