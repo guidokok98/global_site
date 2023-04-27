@@ -575,7 +575,7 @@ def update_voc(n):
               Input('live-update-graph', 'figure'))
 def update_co2(n):
     global df
-    co2 = df['bsec co2_equivalent'][df.shape[0]-1]
+    co2 = df['co2'][df.shape[0]-1]
     co2Dict = chkCO2(co2)
     style = {'padding': '5px', 'fontSize': '20px', 'color': co2Dict['Colour']}
     effect = co2Dict['Effect']

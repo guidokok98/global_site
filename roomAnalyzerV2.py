@@ -10,6 +10,7 @@ from pyowm.owm import OWM
 import urllib.request
 import os #use os.system('sudo shutdown -r now') to reboot if error encountered
 from bme680 import *
+from mh_z19c import *
 
 #converts time from epoch to date and Hours Minutes and Seconds
 def convTimeStamp():
@@ -35,7 +36,7 @@ def openDatabase(path, name):
             row['location'] = 'home'
             df = df.append(row, ignore_index=True)
         else:
-            df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'pressure','gasResistance'])
+            df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'co2', 'pressure','gasResistance'])
     return df
 #saves the database into csv
 def closeDatabase(df, path, name):
@@ -67,6 +68,7 @@ def localTemp():
 path = str(Path(__file__).parent.absolute())
 path = path+'/apps/database_roomAnalyzer'
 bme680 = bme680(0x77)
+co2Sensor = mh_z19c()
 #set sensor in force mode
 bme680.setBitHigh(0x74, 0)
 while((bme680.readReg(0x1D)&0b100000) == 1):
@@ -98,6 +100,7 @@ while 1:
         row['temperature'] = temp + dfParam['temperature compensation'][0]
         row['outside temperature'] = outsideTemp
         row['humidity'] = humi
+        row['co2'] = co2Sensor.read_concentration()
         row['pressure'] = press
         row['gasResistance'] = gasRes
         #adds the value of bsec output to the database
