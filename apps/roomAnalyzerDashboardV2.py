@@ -579,7 +579,7 @@ def update_co2(n):
     co2Dict = chkCO2(co2)
     style = {'padding': '5px', 'fontSize': '20px', 'color': co2Dict['Colour']}
     effect = co2Dict['Effect']
-    return [html.Span('Estimated CO2: {0:0.2f} ppm\t'.format(co2), style = style), html.Span(effect, style = style)]
+    return [html.Span('CO2: {0:0.2f} ppm\t'.format(co2), style = style), html.Span(effect, style = style)]
 
 @app.callback(Output('cur-press', 'children'),
               Input('live-update-graph', 'figure'))
