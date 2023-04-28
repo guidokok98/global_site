@@ -52,17 +52,22 @@ def connect(host='http://google.com'):
     except:
         return False
 
+startTime = time.time()
+hasInternet = True
 while(connect() != True):
-    None
+    if time.time() > startTime+60:
+        hasInternet = False
+        
 #function to retreive local temperature of delft
 owm = OWM('6b01603dd0364a5ed1d2c2939e45380e')
 mgr = owm.weather_manager()
+    
 def localTemp():
     try:
         weather = mgr.weather_at_place('Delft,NL').weather
         temp = float(weather.temperature('celsius')['temp'])
     except:
-        temp = 'None'
+        temp = -1.69420
     return temp
 
 
