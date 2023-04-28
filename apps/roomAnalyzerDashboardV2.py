@@ -616,7 +616,7 @@ def update_co2(n):
               Input('live-update-graph', 'figure'))
 def update_pm25(n):
     global df
-    pm25 = df['pm25'][df.shape[0]-1]
+    pm25 = df['pm2.5'][df.shape[0]-1]
     pm25Dict = chkpm25(pm25)
     style = {'padding': '5px', 'fontSize': '20px', 'color': pm25Dict['Colour']}
     effect = pm25Dict['Effect']
@@ -626,7 +626,7 @@ def update_pm25(n):
               Input('live-update-graph', 'figure'))
 def update_pm100(n):
     global df
-    pm100 = df['pm100'][df.shape[0]-1]
+    pm100 = df['pm10'][df.shape[0]-1]
     pm100Dict = chkpm100(pm100)
     style = {'padding': '5px', 'fontSize': '20px', 'color': pm100Dict['Colour']}
     effect = pm100Dict['Effect']
