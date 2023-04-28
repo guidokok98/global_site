@@ -53,7 +53,7 @@ class mh_z19c:
         for retry in range(self.retry_count):
           result=ser.write(b"\xff\x01\x86\x00\x00\x00\x00\x00\x79")
           s=ser.read(9)
-
+          ser.close()
         if len(s) >= 4 and s[0] == 0xff and s[1] == 0x86 and ord(self.checksum(s[1:-1])) == s[-1]:
           return s[2]*256 + s[3]
       except:

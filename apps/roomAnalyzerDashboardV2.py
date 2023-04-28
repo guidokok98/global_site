@@ -21,8 +21,8 @@ humiBorder = [30.,50.]
 tempBorder = [18.,22.]
 #lookup table for the different iaq ranges
 iaqTab = pd.DataFrame([
-                    [0.,50.,'Excellent', 'Nothing','Nothing', 'green'],
-                    [50.,100.,'Good', 'Nothing','Nothing', 'darkgreen'],
+                    [0.,50.,'Excellent', 'Nothing','Nothing', 'darkgreen'],
+                    [50.,100.,'Good', 'Nothing','Nothing', 'green'],
                     [100.,150.,'Lightly polluted', 'reduction of well-being possible','ventilation', 'yellow'],
                     [150.,200.,'Moderately polluted', 'significant irritation possible','increase ventilation', 'orange'],
                     [200.,250.,'Heavily polluted', 'Headache terretory','optimize ventilation', 'red'],
@@ -37,8 +37,8 @@ iaqAccTab = {0: 'Stabilizing',
              3: 'Calibrated'}
 #lookup table for the different co2 ranges
 co2Tab = pd.DataFrame([ #https://www.kane.co.uk/knowledge-centre/what-are-safe-levels-of-co-and-co2-in-rooms
-                    [0.,400.,'Normal outdoor', 'green'],
-                    [400.,1000.,'Normal indoor, good air', 'darkgreen'],
+                    [0.,400.,'Normal outdoor', 'darkgreen'],
+                    [400.,1000.,'Normal indoor, good air', 'green'],
                     [1000.,2000.,'Complaints of drowsiness and poor air', 'yellow'],
                     [2000.,5000.,'Headaches, sleepiness and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate and slight nausea may also be present.', 'red'],
                     [5000.,40000.,'Workplace exposure limit (as 8-hour TWA) in most jurisdictions.', 'purple'],
@@ -76,7 +76,6 @@ def chkCO2(val):
 def readCSV(tempDf, dfName):
     global pathLoc
     file = pathLoc+'/'+dfName+'.csv'
-    print('open following: ', file)
     try:
         tempDf = pd.read_csv(file)
     except:
@@ -209,7 +208,6 @@ try:
 except:
     df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'pressure','gasResistance'])
 
-print("loading done. pathLoc: ", pathLoc)
 #define the app
 layout = html.Div(children=[
                       html.Div(className='row',  # Define the row element
@@ -332,7 +330,6 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
     global df
     global locationStart
     global pathLoc
-    print(" ===== \n update_graph loc: ", locationStart, ' pathLoc: ', pathLoc, '\n =====')
     if type(dateBegin) == str:    
         df = selectDate(dateBegin,dateEnd)
     else:
@@ -395,6 +392,10 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
         if option == 'bsec iaq':
             for i in range(0, len(iaqTab), 1):
                 fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option].where(filteredDf[option] >= iaqTab.iloc[i]['Lower range']), mode=modus, line = dict(color=iaqTab.iloc[i]['Colour'], width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
+        elif option == 'co2' or option == 'bsec co2_equivalent':
+            for i in range(0, len(co2Tab), 1):
+                fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option].where(filteredDf[option] >= co2Tab.iloc[i]['Lower range']), mode=modus, line = dict(color=co2Tab.iloc[i]['Colour'], width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
+        
         else:
             #adds the plot in the green to the template
             fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option], mode=modus, line =dict(color='green', width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
@@ -444,7 +445,6 @@ def update_timeLoc(value, n):
     global pathLoc
     dfParam = pd.read_csv(path+'/parameters.csv')
     locationStart = dfParam['location'][0]
-    print("trigger update loc and return: ", locationStart, 'path: ', pathLoc)
     return locationStart
 #saves the database into csv
 def closeDatabase(df, path, name):
@@ -475,13 +475,9 @@ def update_preferences(n_clicks, tempComp, timeInt, location):
     timeIntervalStart = timeInt
     locationStart = location
     timeInt = float(timeInt)
-    print('pathLoc old: ', pathLoc)
     pathLoc = path+'/'+str(location)
     if os.path.isdir(pathLoc) == False:
         os.mkdir(pathLoc)
-    print('pathLoc new: ', pathLoc)
-    print('tempComp: ', tempComp)
-    print('timeInt: ', timeInt)
     df = df.append(row, ignore_index=True)
     closeDatabase(df,path, 'parameters')
     return [html.Span('Updated {} times'.format(n_clicks), style={'color': 'white'})]
