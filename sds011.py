@@ -35,9 +35,9 @@ class sds011:
     
     #when new class object is made, set temp,humi and press oversampling on 8 and IIR filter on 3
     def __init__(self):
-        # self.partial_serial_dev = 'ttyUSB0'
-        # self.serial_dev = '/dev/%s' % self.partial_serial_dev
-        self.serial_dev = 'COM4'
+        self.partial_serial_dev = 'ttyUSB0'
+        self.serial_dev = '/dev/%s' % self.partial_serial_dev
+        # self.serial_dev = 'COM4'
         #set query mode! and sleep
         self.setSleepOrWork('sleep')
         self.setDataReportingMode('query')
