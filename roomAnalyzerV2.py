@@ -36,7 +36,7 @@ def openDatabase(path, name):
             row['location'] = 'home'
             df = df.append(row, ignore_index=True)
         else:
-            df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'co2', 'pressure','gasResistance'])
+            df = pd.DataFrame(columns=['date', 'timeStamp', 'temperature', 'outside temperature', 'humidity', 'co2', 'pm2.5', 'pm10', 'pressure','gasResistance'])
     return df
 #saves the database into csv
 def closeDatabase(df, path, name):
@@ -69,16 +69,14 @@ path = str(Path(__file__).parent.absolute())
 path = path+'/apps/database_roomAnalyzer'
 bme680 = bme680(0x77)
 co2Sensor = mh_z19c()
+dustSensor = sds011()
 #set sensor in force mode
 bme680.setBitHigh(0x74, 0)
 while((bme680.readReg(0x1D)&0b100000) == 1):
     None
-temp = bme680.getTemp()
-humi = bme680.getHumi()
-press = bme680.getPress()
-gasRes = bme680.getGasRes()
 
 while 1:
+    startTime = time.time()
     timeDate, timeHMS = convTimeStamp()
     dfParam = openDatabase(path, 'parameters')
     pathLoc = path+'/'+dfParam['location'][0]
@@ -91,6 +89,8 @@ while 1:
     press = bme680.getPress()
     gasRes = bme680.getGasRes()
     localTemp1 = localTemp()
+    co2Val = co2Sensor.read_concentration()
+    pm25, pm100 = dustSensor.readout()
     if localTemp1 != 'None':
         outsideTemp = localTemp1
     #print(f'temp: {temp}C \t humi: {humi}% \t press: {press}Pa \t gasRes: {gasRes}Ohm \t outside temp: {outsideTemp} C')
@@ -100,7 +100,9 @@ while 1:
         row['temperature'] = temp + dfParam['temperature compensation'][0]
         row['outside temperature'] = outsideTemp
         row['humidity'] = humi
-        row['co2'] = co2Sensor.read_concentration()
+        row['co2'] = co2Val
+        row['pm2.5'] = pm25
+        row['pm10'] = pm100
         row['pressure'] = press
         row['gasResistance'] = gasRes
         #adds the value of bsec output to the database
@@ -111,6 +113,7 @@ while 1:
         df = openDatabase(pathLoc, timeDate)
         df = df.append(row, ignore_index=True)
         closeDatabase(df,pathLoc, timeDate)
-    time.sleep(dfParam['time interval'][0]*60)
-
-
+    while (time.time() < (startTime+dfParam['time interval'][0]*60)):
+        None    
+        
+    # time.sleep(dfParam['time interval'][0]*60)

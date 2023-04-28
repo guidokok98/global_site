@@ -45,6 +45,17 @@ co2Tab = pd.DataFrame([ #https://www.kane.co.uk/knowledge-centre/what-are-safe-l
                     [40000.,99999.,'Exposure may lead to serious oxygen deprivation resulting in permanent brain damage, coma, even death.', 'brown']
                     ],
                   columns = ['Lower range','Upper range','Effect','Colour'])
+
+#lookup table for the different pm2.5 dust particals ranges
+pm25Tab = pd.DataFrame([
+                    [0.,99999.,'Unknown', 'darkgreen'],
+                    ],
+                  columns = ['Lower range','Upper range','Effect','Colour'])
+#lookup table for the different pm2.5 dust particals ranges
+pm100Tab = pd.DataFrame([
+                    [0.,99999.,'Unknown', 'darkgreen'],
+                    ],
+                  columns = ['Lower range','Upper range','Effect','Colour'])
 #retreives the columns names for the different options
 def getOptions():
     options = []
@@ -72,6 +83,22 @@ def chkCO2(val):
                        'Colour' : co2Tab.iloc[i]['Colour']
                 }
             return co2Dict
+#checks in which range the value belongs, returns an dict with all the properties of that range
+def chkpm25(val):
+    for i in range(0, len(pm25Tab), 1):
+        if val >= pm25Tab.iloc[i]['Lower range'] and val <  pm25Tab.iloc[i]['Upper range']:
+            pm25Dict = {'Effect' : pm25Tab.iloc[i]['Effect'],
+                       'Colour' : pm25Tab.iloc[i]['Colour']
+                }
+            return pm25Dict
+#checks in which range the value belongs, returns an dict with all the properties of that range
+def chkpm100(val):
+    for i in range(0, len(pm100Tab), 1):
+        if val >= pm100Tab.iloc[i]['Lower range'] and val <  pm100Tab.iloc[i]['Upper range']:
+            pm100Dict = {'Effect' : pm100Tab.iloc[i]['Effect'],
+                       'Colour' : pm100Tab.iloc[i]['Colour']
+                }
+            return pm100Dict
 #selects the data of past given hours
 def readCSV(tempDf, dfName):
     global pathLoc
@@ -221,8 +248,10 @@ layout = html.Div(children=[
                                             html.Div(id='cur-temp'),
                                             html.Div(id='cur-outsideTemp'),
                                             html.Div(id='cur-humi'),
+                                            html.Div(id='cur-co2'),
+                                            html.Div(id='cur-pm25'),
+                                            html.Div(id='cur-pm100'),
                                             html.Div(id='cur-iaq'),
-                                            html.Div(id='cur-eco2'),
                                             html.Div(id='cur-voc'),
                                             html.Div(id='cur-press'),
                                             html.Div(id='cur-gasRes'),
@@ -395,7 +424,13 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
         elif option == 'co2' or option == 'bsec co2_equivalent':
             for i in range(0, len(co2Tab), 1):
                 fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option].where(filteredDf[option] >= co2Tab.iloc[i]['Lower range']), mode=modus, line = dict(color=co2Tab.iloc[i]['Colour'], width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
-        
+        elif option == 'pm25':
+            for i in range(0, len(pm25Tab), 1):
+                fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option].where(filteredDf[option] >= pm25Tab.iloc[i]['Lower range']), mode=modus, line = dict(color=pm25Tab.iloc[i]['Colour'], width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
+        elif option == 'pm100' :
+            for i in range(0, len(pm100Tab), 1):
+                fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option].where(filteredDf[option] >= pm100Tab.iloc[i]['Lower range']), mode=modus, line = dict(color=pm100Tab.iloc[i]['Colour'], width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
+
         else:
             #adds the plot in the green to the template
             fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option], mode=modus, line =dict(color='green', width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
@@ -567,7 +602,7 @@ def update_voc(n):
     style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
     return [html.Span('Estimated VOC: {} ppm ({} ppb)\t'.format(round(voc,2), round(voc*1000.,2)), style = style)]
 
-@app.callback(Output('cur-eco2', 'children'),
+@app.callback(Output('cur-co2', 'children'),
               Input('live-update-graph', 'figure'))
 def update_co2(n):
     global df
@@ -576,6 +611,26 @@ def update_co2(n):
     style = {'padding': '5px', 'fontSize': '20px', 'color': co2Dict['Colour']}
     effect = co2Dict['Effect']
     return [html.Span('CO2: {0:0.2f} ppm\t'.format(co2), style = style), html.Span(effect, style = style)]
+
+@app.callback(Output('cur-pm25', 'children'),
+              Input('live-update-graph', 'figure'))
+def update_pm25(n):
+    global df
+    pm25 = df['pm25'][df.shape[0]-1]
+    pm25Dict = chkpm25(pm25)
+    style = {'padding': '5px', 'fontSize': '20px', 'color': pm25Dict['Colour']}
+    effect = pm25Dict['Effect']
+    return [html.Span('dust pm2.5: {0:0.2f} ppm\t'.format(pm25), style = style), html.Span(effect, style = style)]
+
+@app.callback(Output('cur-pm100', 'children'),
+              Input('live-update-graph', 'figure'))
+def update_pm100(n):
+    global df
+    pm100 = df['pm100'][df.shape[0]-1]
+    pm100Dict = chkpm100(pm100)
+    style = {'padding': '5px', 'fontSize': '20px', 'color': pm100Dict['Colour']}
+    effect = pm100Dict['Effect']
+    return [html.Span('dust pm10: {0:0.2f} ppm\t'.format(pm100), style = style), html.Span(effect, style = style)]
 
 @app.callback(Output('cur-press', 'children'),
               Input('live-update-graph', 'figure'))
