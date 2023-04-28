@@ -92,6 +92,7 @@ while 1:
     localTemp1 = localTemp()
     co2Val = co2Sensor.read_concentration()
     pm25, pm100 = dustSensor.readout()
+    print(f'pm25{pm25}, pm100{pm100}')
     if localTemp1 != 'None':
         outsideTemp = localTemp1
     #print(f'temp: {temp}C \t humi: {humi}% \t press: {press}Pa \t gasRes: {gasRes}Ohm \t outside temp: {outsideTemp} C')

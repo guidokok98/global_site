@@ -118,13 +118,13 @@ class sds011:
     def processData(self, data):
         pm25LowByte =  data[2]
         pm25HighByte = data[3]
-        pm25 =( (pm25HighByte << 8) | pm25LowByte)/10.0 #micro g/m^3
-        print('pm2.5: ', pm25)
+        self.pm25 =( (pm25HighByte << 8) | pm25LowByte)/10.0 #micro g/m^3
+        print('pm2.5: ', self.pm25)
         pm100LowByte =  data[4]
         pm100HighByte = data[5]
-        pm100 = ((pm100HighByte << 8) | pm100LowByte)/10.0 #micro g/m^3
-        print('pm10: ', pm100)
-        return pm25, pm100
+        self.pm100 = ((pm100HighByte << 8) | pm100LowByte)/10.0 #micro g/m^3
+        print('pm10: ', self.pm100)
+        return self.pm25, self.pm100
         
     def queryDataCmd(self):
         self.connect_serial()
