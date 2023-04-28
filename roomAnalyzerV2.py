@@ -11,6 +11,7 @@ import urllib.request
 import os #use os.system('sudo shutdown -r now') to reboot if error encountered
 from bme680 import *
 from mh_z19c import *
+from sds011 import *
 
 #converts time from epoch to date and Hours Minutes and Seconds
 def convTimeStamp():
