@@ -620,7 +620,7 @@ def update_pm25(n):
     pm25Dict = chkpm25(pm25)
     style = {'padding': '5px', 'fontSize': '20px', 'color': pm25Dict['Colour']}
     effect = pm25Dict['Effect']
-    return [html.Span('dust pm2.5: {0:0.2f} ppm\t'.format(pm25), style = style), html.Span(effect, style = style)]
+    return [html.Span('dust pm2.5: {0:0.2f} microgram /m^3\t'.format(pm25), style = style), html.Span(effect, style = style)]
 
 @app.callback(Output('cur-pm100', 'children'),
               Input('live-update-graph', 'figure'))
@@ -630,7 +630,7 @@ def update_pm100(n):
     pm100Dict = chkpm100(pm100)
     style = {'padding': '5px', 'fontSize': '20px', 'color': pm100Dict['Colour']}
     effect = pm100Dict['Effect']
-    return [html.Span('dust pm10: {0:0.2f} ppm\t'.format(pm100), style = style), html.Span(effect, style = style)]
+    return [html.Span('dust pm10: {0:0.2f} microgram /m^3\t'.format(pm100), style = style), html.Span(effect, style = style)]
 
 @app.callback(Output('cur-press', 'children'),
               Input('live-update-graph', 'figure'))
