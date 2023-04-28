@@ -144,6 +144,6 @@ class sds011:
         
         
         
-dustSensor = sds011()
-pm25, pm100 = dustSensor.readout()
+# dustSensor = sds011()
+# pm25, pm100 = dustSensor.readout()
 # dustSensor.setDataReportingMode('query')
