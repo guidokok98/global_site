@@ -484,9 +484,10 @@ a {
   height: 50px;
   padding-bottom: 12px;
 }
+/*select menu text and background, not hover version*/
 .Select-control, .Select-menu-outer, .Select-multi-value-wrapper, .select-up, .is-open .Select-control {
-  background-color: #1e1e1e;
-  color: black;
+  background-color: #141414;
+  color: white;
 
 }
 
