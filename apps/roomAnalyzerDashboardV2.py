@@ -378,7 +378,6 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)','paper_bgcolor': 'rgba(0, 0, 0, 0)'})
     fig.update_layout(template="plotly_dark")
-    i = 0
     #checks if overlap is selected
     if len(overlap) == 0:
         overlap = ['None']
@@ -399,9 +398,9 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
     for col in filteredDf.columns[1:]:
         dfColumns.append(col)
     #loop through all the selected options
+    y = 0
     for option in dfColumns:
-        print(f'i = {i}, overlap = {overlap[0]}')
-        if i == 1 and overlap[0] == 'Overlp':
+        if y == 1 and overlap[0] == 'Overlp':
             secondY = True
             modus = 'lines'
             dashOpt = 'dash'
@@ -441,8 +440,7 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
             #when above second border, make line red
             if borders[1] !='none':
                 fig.add_trace(go.Scatter(x=filteredDf['timeStamp'], y=filteredDf[option].where(filteredDf[option] >borders[1]), mode=modus, line =dict(color='red', width=widthOpt, dash=dashOpt), name= option), secondary_y= secondY)
-
-        i = i+1
+        y = y+1
     #hide the legend
     fig.update_layout(showlegend=False)
     #change y axes grid to darkblue to improve the readability
