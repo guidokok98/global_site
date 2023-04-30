@@ -57,6 +57,7 @@ hasInternet = True
 while(connect() != True):
     if time.time() > startTime+60:
         hasInternet = False
+        break
         
 #function to retreive local temperature of delft
 owm = OWM('6b01603dd0364a5ed1d2c2939e45380e')

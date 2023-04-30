@@ -400,6 +400,7 @@ def update_graph_live(n, hours, options, overlap, toZero, diffDt, showDtOnly, da
         dfColumns.append(col)
     #loop through all the selected options
     for option in dfColumns:
+        print(f'i = {i}, overlap = {overlap[0]}')
         if i == 1 and overlap[0] == 'Overlp':
             secondY = True
             modus = 'lines'
