@@ -602,10 +602,12 @@ def getStats(username):
     # user.FchampsInfo()
     del user
 
-
-champ_dict = champ_dict()
-map_dict = map_dict()
-my_region = 'europe'
+try:
+    champ_dict = champ_dict()
+    map_dict = map_dict()
+    my_region = 'europe'
 # getStats('ironsuperhulk')
 
 #x['participants'][1]['summonerName']
+except:
+    None
