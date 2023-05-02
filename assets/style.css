@@ -487,7 +487,7 @@ a {
 /*select menu text and background, not hover version*/
 .Select-control, .Select-menu-outer, .Select-multi-value-wrapper, .select-up, .is-open .Select-control {
   background-color: #141414;
-  color: white;
+  color: rgb(0, 0, 0);
 
 }
 
