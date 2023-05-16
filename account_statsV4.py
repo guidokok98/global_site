@@ -179,16 +179,28 @@ class player:
                 time.sleep(10)
     #get the played map
     def FmatchMap(self):
-        try:
-            self.matchMap = map_dict[str(self.matchDetails['mapId'])]
-        except:
-            self.matchMap = 'unknown'
+        retry = True
+        while retry == True:
+            try:
+                self.matchMap = map_dict[str(self.matchDetails['mapId'])]
+                retry = False
+            except:
+                time.sleep(60)
+                updateDicts()
+                self.matchMap = 'unknown'
+                retry = True
     #get game mode
     def FgameMode(self):
-        try:
-            self.gameMode = self.matchDetails['gameMode']
-        except:
-             self.gameMode = 'unknown'
+        retry = True
+        while retry == True:
+            try:
+                self.gameMode = self.matchDetails['gameMode']
+                retry = False
+            except:
+                time.sleep(60)
+                updateDicts()
+                self.gameMode = 'unknown'
+                retry = True
 
 #get info of al the owned champions
     def FchampInfo(self):
@@ -291,10 +303,16 @@ class player:
     #get played champ of the player
     def Fchamp(self):
         self.playerChampId = self.partData['championId']
-        try:
-            self.playerChamp = champ_dict[str(self.playerChampId)]
-        except:
-            self.playerChamp = 'unknown'
+        retry = True
+        while retry == True:
+            try:
+                self.playerChamp = champ_dict[str(self.playerChampId)]
+                retry = False
+            except:    
+                self.playerChamp = 'unknown'
+                time.sleep(60)
+                updateDicts()
+                retry = True
     #get the team of the player
     def Fteam(self):
         self.playerTeam = self.partData['teamId']
@@ -602,12 +620,18 @@ def getStats(username):
     # user.FchampsInfo()
     del user
 
-try:
-    champ_dict = champ_dict()
-    map_dict = map_dict()
-    my_region = 'europe'
-# getStats('ironsuperhulk')
+def updateDicts():
+    global champ_dict, map_dict, my_region
+    try:
+        
+        my_region = 'euw1'
+        champ_dict = champ_dict()
+        map_dict = map_dict()
+        my_region = 'europe'
+    except:
+        None
 
-#x['participants'][1]['summonerName']
-except:
-    None
+updateDicts()
+getStats('ironsuperhulk')
+
+
