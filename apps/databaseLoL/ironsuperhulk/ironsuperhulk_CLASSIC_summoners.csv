@@ -1,10 +1,10 @@
 summoner_name,played_with,won_with,played_against,lost_against,last_played,date
-ironsuperhulk,39.0,19,0,0,Vi,14-2-2023 19:57
-Jeeveezee,34.0,18,0,0,Akali,14-2-2023 19:57
-yvan i am,23.0,10,0,0,Heimerdinger,14-2-2023 19:57
-BluezamX,22.0,11,0,0,Ashe,26-12-2022 14:28
+ironsuperhulk,44.0,23,0,0,Milio,28-6-2023 21:27
+Jeeveezee,39.0,22,0,0,Zeri,28-6-2023 21:27
+yvan i am,28.0,14,0,0,Garen,28-6-2023 21:27
+BluezamX,25.0,13,0,0,Blitzcrank,17-5-2023 21:43
+impreg the keg,9.0,6,0,0,Aphelios,17-5-2023 21:43
 MCB Sensific,7.0,4,0,0,Kaisa,0
-impreg the keg,6.0,4,0,0,Zac,10-12-2022 21:49
 KataStrophically,2.0,2,0,0,Nasus,23-4-2022 21:15
 Aidivni,2.0,2,0,0,Yasuo,23-4-2022 21:15
 Schwifty Boy,2.0,0,0,0,Poppy,8-5-2022 13:0
@@ -22,7 +22,11 @@ Masterrave,1.0,1,0,0,Ashe,10-12-2022 21:49
 Marco310,1.0,1,0,0,Jhin,0
 Le Glouton,1.0,1,0,0,Gwen,0
 Landoff,1.0,1,0,0,Blitzcrank,0
+Kvaxqt,1.0,1,0,0,Veigar,28-6-2023 21:27
 KHARONA VARUS,1.0,1,0,0,Yasuo,0
+Hohenheim97,1.0,1,0,0,Garen,28-6-2023 21:27
+GabOch,1.0,1,0,0,Rengar,28-6-2023 21:27
+Frodilo,1.0,1,0,0,Anivia,28-6-2023 21:27
 Frechdachs Nomsi,1.0,1,0,0,JarvanIV,1-10-2022 20:49
 Dubio,1.0,1,0,0,Jinx,10-12-2022 21:19
 Cman171,1.0,1,0,0,Zeri,10-12-2022 21:49
@@ -104,11 +108,13 @@ bpd girl xoxo,0.0,0,1,0,Samira,10-12-2022 21:49
 archroft,0.0,0,1,1,Galio,0
 anyways so,0.0,0,1,0,Qiyana,26-12-2022 14:28
 Zęρhyr,0.0,0,1,0,Orianna,0
+Zimbababoue,0.0,0,1,0,Jhin,28-6-2023 21:27
 Zerudax,0.0,0,1,1,Anivia,0
 Zeehna,0.0,0,1,0,Soraka,0
 ZeKrown0,0.0,0,1,1,KogMaw,0
 Yukino daisiki,0.0,0,1,1,Vayne,1-10-2022 21:20
 Yazelenec,0.0,0,1,0,Jax,26-12-2022 14:28
+Xlivin,0.0,0,1,0,Olaf,28-6-2023 21:27
 Xandar03,0.0,0,1,0,MasterYi,10-12-2022 21:19
 WolfWaren,0.0,0,1,0,Sion,0
 WolaGpasMenti,0.0,0,1,0,Kaisa,4-3-2022 18:20
@@ -117,6 +123,8 @@ Volleole,0.0,0,1,0,Brand,23-4-2022 21:15
 Voladimur,0.0,0,1,1,Bard,0
 VladiMdlr,0.0,0,1,1,Diana,0
 Valiens,0.0,0,1,0,Trundle,26-12-2022 14:28
+VaLi LuCïFeR,0.0,0,1,0,Samira,28-6-2023 21:27
+Urgø,0.0,0,1,0,XinZhao,4-5-2023 22:20
 Trololiver 1G,0.0,0,2,2,Sion,8-5-2022 13:0
 Tismeh,0.0,0,1,1,Zeri,0
 ThotPatroI,0.0,0,1,1,Syndra,0
@@ -128,10 +136,13 @@ Sφra,0.0,0,1,1,Shaco,0
 Sâk Amaird,0.0,0,1,0,Darius,0
 SuWang,0.0,0,1,0,Sion,0
 Sorte Slyngel,0.0,0,2,2,Karthus,8-5-2022 13:0
+SoloAzz,0.0,0,1,0,Karma,28-6-2023 21:27
 Skilbibi,0.0,0,1,1,MissFortune,0
 Sir spetterpret,0.0,0,1,1,Sejuani,0
 SilentDream,0.0,0,2,2,Shaco,8-5-2022 13:0
+Shirotsumekusa,0.0,0,1,0,Caitlyn,4-5-2023 22:20
 ShesMyLulu,0.0,0,1,1,Yasuo,12-7-2022 12:26
+SettΘnMyFace,0.0,0,1,0,Sion,28-6-2023 21:27
 Sciccors Lady,0.0,0,1,0,Ezreal,0
 Savahira,0.0,0,1,1,Ahri,0
 Sakrisós,0.0,0,1,1,Gangplank,0
@@ -139,21 +150,26 @@ STC Tornado,0.0,0,1,1,Kalista,14-2-2023 19:57
 S n y s z,0.0,0,1,1,Lulu,0
 S i i N o K,0.0,0,1,1,Zilean,0
 RvsipT,0.0,0,1,1,Jayce,0
+RoughGuenni,0.0,0,1,0,Lux,17-5-2023 21:43
 Riko9S,0.0,0,1,1,Gwen,0
 Rihagan,0.0,0,1,1,Pantheon,0
 Raflize,0.0,0,1,0,DrMundo,0
+RAC Travesuras,0.0,0,1,0,MonkeyKing,28-6-2023 21:27
 Qlímąx,0.0,0,1,0,Kaisa,0
 PyroPro1234,0.0,0,1,1,Riven,0
 PrettyPixel,0.0,0,1,0,Sylas,0
 Prameda,0.0,0,1,0,Jhin,0
 PommesKopfMcGelb,0.0,0,1,1,Yasuo,0
 Polpilax,0.0,0,1,1,Lux,0
+Platzpatrone1980,0.0,0,1,0,Caitlyn,17-5-2023 21:43
 Plapla,0.0,0,1,0,Kayn,26-12-2022 14:28
+PiiwGG,0.0,0,1,1,Zed,4-5-2023 22:19
 Pate Don Käse,0.0,0,1,1,Nasus,0
 OverGàmes18,0.0,0,1,0,Pyke,0
 Ouisti,0.0,0,1,0,Senna,0
 Op Asher,0.0,0,1,1,DrMundo,0
 Oh My Evelynn,0.0,0,1,0,Vi,1-10-2022 20:49
+OcelotRising,0.0,0,1,0,Fizz,17-5-2023 21:43
 Nutellabeere,0.0,0,1,0,Riven,0
 Not ur Medic,0.0,0,1,1,Caitlyn,0
 Not Doriin,0.0,0,1,0,Khazix,23-4-2022 21:15
@@ -171,6 +187,7 @@ MogJaune,0.0,0,1,1,LeeSin,0
 Moak,0.0,0,1,0,Fiddlesticks,0
 MjunI2,0.0,0,2,2,Seraphine,8-5-2022 13:0
 Miracle Jojo,0.0,0,1,1,Aphelios,0
+Midaregami,0.0,0,1,0,Cassiopeia,4-5-2023 22:20
 Melague,0.0,0,1,0,Zoe,0
 Meeboy,0.0,0,1,0,Viego,0
 McNuuttii,0.0,0,1,1,Diana,0
@@ -189,25 +206,32 @@ LaChienneduTipi,0.0,0,1,0,Irelia,4-3-2022 18:20
 LIl Chawp X,0.0,0,1,1,Jhin,0
 Körra,0.0,0,1,0,Jhin,23-4-2022 21:15
 Kíìz,0.0,0,1,0,Caitlyn,0
+Kyblik,0.0,0,1,0,Zyra,4-5-2023 22:20
+KrixusWichsus,0.0,0,1,0,JarvanIV,28-6-2023 21:27
 Kapucynek,0.0,0,1,1,Riven,0
 KON pH,0.0,0,1,0,Ryze,0
 KC REBELL SHISHA,0.0,0,1,1,DrMundo,0
 Jush36,0.0,0,1,1,Cassiopeia,0
 Jorgillo el rey,0.0,0,1,0,Ornn,0
 Jolanix,0.0,0,1,0,Rell,0
+Joe Fixit,0.0,0,1,1,Riven,4-5-2023 22:19
 Islendar,0.0,0,1,1,Fizz,0
 I Shinatori I,0.0,0,1,1,Gangplank,0
 Húdy,0.0,0,1,0,Jinx,0
 HugoSwordman123,0.0,0,1,1,Jinx,0
 Hinki,0.0,0,1,0,Ezreal,23-4-2022 20:34
+Hidden in Mist,0.0,0,1,0,Pantheon,28-6-2023 21:27
 HiBro,0.0,0,1,1,Graves,0
 Heiwa,0.0,0,1,1,Diana,1-10-2022 21:20
 HatsuneNico,0.0,0,1,1,Xerath,0
 Hanzwurst59,0.0,0,1,1,Xerath,0
 HDlite,0.0,0,1,1,Viktor,14-2-2023 19:57
+GünterSchnetzler,0.0,0,1,0,Udyr,17-5-2023 21:43
+Gîin,0.0,0,1,1,Ivern,4-5-2023 22:19
 Guigoossens,0.0,0,1,0,Viktor,0
 GradeZZ,0.0,0,1,0,Malzahar,4-3-2022 18:20
 Gilbobo,0.0,0,1,0,Yone,4-3-2022 18:20
+Geroldus666,0.0,0,1,0,Illaoi,17-5-2023 21:43
 Gegelabest,0.0,0,1,1,Brand,0
 FåMegUtPls,0.0,0,1,0,Zoe,0
 Frazyy,0.0,0,1,0,MissFortune,1-10-2022 20:49
@@ -219,6 +243,7 @@ Epik Tablo,0.0,0,1,1,Yorick,14-2-2023 19:57
 Eooris,0.0,0,1,0,KogMaw,0
 Electice,0.0,0,1,0,Renata,1-10-2022 20:49
 ElFlemas,0.0,0,1,1,Veigar,0
+ELGRAND Hobaylos,0.0,0,1,1,Ezreal,4-5-2023 22:19
 Drohach,0.0,0,1,1,MasterYi,0
 Dr Xeno,0.0,0,1,1,Gwen,0
 DonChiChatto,0.0,0,1,0,Fiddlesticks,4-3-2022 18:20
@@ -230,6 +255,7 @@ Dark5ider5,0.0,0,1,0,Sion,26-12-2022 14:28
 DarK SaSuKe Off,0.0,0,1,0,Qiyana,0
 Danielicious,0.0,0,1,1,Shyvana,0
 DanielHunter65,0.0,0,1,0,Viktor,10-12-2022 21:19
+DaRealWeapon,0.0,0,1,0,Jax,4-5-2023 22:20
 DRdalV770,0.0,0,1,0,Maokai,10-12-2022 21:49
 Cuttlefísh,0.0,0,1,1,Lucian,12-7-2022 12:26
 CrownedClown98,0.0,0,1,1,MonkeyKing,0
@@ -248,10 +274,13 @@ AzyTsuayo,0.0,0,1,0,Renekton,0
 Arstario,0.0,0,1,0,Khazix,23-4-2022 20:34
 Anemiè,0.0,0,1,1,Nasus,0
 AndP1,0.0,0,1,1,Xerath,11-7-2022 18:4
+AlwiniusQuintus,0.0,0,1,0,Yone,28-6-2023 21:27
 Adrien France,0.0,0,1,0,TahmKench,1-10-2022 20:49
 20 Meter Loli,0.0,0,1,0,Rammus,10-12-2022 21:49
+1214,0.0,0,1,1,Thresh,4-5-2023 22:19
 0nlap,0.0,0,1,0,Aatrox,0
 0niiiiii,0.0,0,1,0,Alistar,0
 0P Lasagne,0.0,0,1,0,Seraphine,0
 0P Asian,0.0,0,1,0,Khazix,0
+0AAnnAA0,0.0,0,1,0,Rakan,28-6-2023 21:27
  Giąnn,0.0,0,1,1,Rammus,0

@@ -1,10 +1,11 @@
 summoner_name,played_with,won_with,played_against,lost_against,last_played,date
-Jeeveezee,80.0,39,0,0,Ezreal,4-8-2022 22:8
-yvan i am,45.0,25,0,0,Urgot,0
+Jeeveezee,81.0,40,1,1,TwistedFate,18-5-2023 21:41
+yvan i am,46.0,26,1,1,Garen,18-5-2023 21:41
 MCB Sensific,19.0,12,0,0,Zilean,0
-BluezamX,15.0,10,0,0,Warwick,20-3-2022 15:16
-ironsuperhulk,9.0,4,0,0,Quinn,0
+BluezamX,16.0,11,1,1,TahmKench,18-5-2023 21:41
+ironsuperhulk,10.0,5,1,1,Bard,18-5-2023 21:41
 ELaMO,6.0,1,0,0,Jhin,0
+impreg the keg,2.0,1,1,1,Aphelios,18-5-2023 21:41
 x14csfad,1.0,1,0,0,Sivir,0
 omegaluck,1.0,1,0,0,Fizz,0
 meWoods,1.0,1,0,0,Shaco,0
@@ -129,7 +130,6 @@ melu,1.0,0,0,0,Viktor,4-8-2022 22:8
 liBSYUAN,1.0,0,0,0,JarvanIV,0
 laxaal,1.0,0,0,0,Yorick,0
 ki11i,1.0,0,0,0,Gwen,0
-impreg the keg,1.0,0,0,0,Varus,0
 i want grill,1.0,0,0,0,Renekton,0
 i love boul,1.0,0,0,0,Mordekaiser,4-8-2022 22:7
 gnJUL RicardMan,1.0,0,0,0,Swain,4-8-2022 22:7
@@ -164,12 +164,15 @@ SGC Toxic,1.0,0,0,0,MonkeyKing,0
 SBARRATURGIDA ,1.0,0,0,0,Pyke,0
 SANOVAA,1.0,0,0,0,JarvanIV,0
 SAD3N,1.0,0,0,0,Vayne,0
+RoughGuenni,1.0,0,0,0,Lux,18-5-2023 21:40
 RoccatinoVD,1.0,0,0,0,Blitzcrank,0
 Quencolphyss,1.0,0,0,0,Ashe,4-8-2022 22:8
 PolarisOmega,1.0,0,0,0,MasterYi,0
+Platzpatrone1980,1.0,0,0,0,Caitlyn,18-5-2023 21:40
 Pikächu,1.0,0,0,0,Gnar,0
 Petit Pere Dodu,1.0,0,0,0,XinZhao,0
 Pechu,1.0,0,0,0,Viego,0
+OcelotRising,1.0,0,0,0,Fizz,18-5-2023 21:40
 Nuqq123,1.0,0,0,0,Gangplank,4-8-2022 22:7
 NoLube,1.0,0,0,0,Leona,0
 NekroSad,1.0,0,0,0,Lulu,0
@@ -201,6 +204,8 @@ Huno,1.0,0,0,0,Yone,0
 HoIidayArmadillo,1.0,0,0,0,Evelynn,0
 Harvoon,1.0,0,0,0,Galio,0
 Haecky01,1.0,0,0,0,Kennen,0
+GünterSchnetzler,1.0,0,0,0,Udyr,18-5-2023 21:40
+Geroldus666,1.0,0,0,0,Illaoi,18-5-2023 21:40
 GeorgeHJ1828,1.0,0,0,0,Ryze,0
 GakobTheKilller,1.0,0,0,0,Ryze,0
 Free Dopa,1.0,0,0,0,Renekton,0
@@ -320,6 +325,7 @@ Veneris,0.0,0,1,1,Ahri,0
 Velsheda,0.0,0,1,1,Kaisa,0
 Vaquero0o,0.0,0,1,0,Renekton,0
 VanHoutte,0.0,0,1,0,Jhin,0
+Urgø,0.0,0,1,0,XinZhao,18-5-2023 21:41
 Upawn,0.0,0,1,1,Lulu,0
 Unstable Being,0.0,0,1,0,Sylas,0
 Typical Elo Hell,0.0,0,1,0,Sejuani,0
@@ -358,6 +364,7 @@ SoTooZ,0.0,0,1,0,Bard,0
 Snowflakes,0.0,0,1,1,Rengar,0
 Sleifa,0.0,0,1,1,Xayah,0
 SimWa,0.0,0,1,0,Jinx,0
+Shirotsumekusa,0.0,0,1,0,Caitlyn,18-5-2023 21:41
 Shining Sun,0.0,0,1,0,Riven,0
 Shaduvar,0.0,0,1,0,Kaisa,0
 Serge Catherine,0.0,0,1,1,Darius,0
@@ -445,6 +452,7 @@ Mkaa,0.0,0,1,0,Blitzcrank,0
 Miracle Jojo,0.0,0,1,1,Aphelios,0
 Mimööö,0.0,0,1,1,Lulu,0
 Migabv2000,0.0,0,1,0,Volibear,0
+Midaregami,0.0,0,1,0,Cassiopeia,18-5-2023 21:41
 Meywen,0.0,0,1,1,MissFortune,0
 Metromann,0.0,0,1,0,Qiyana,0
 Mesterdetektiven,0.0,0,1,1,MonkeyKing,0
@@ -468,6 +476,7 @@ LJP Lion,0.0,0,1,1,Ahri,0
 LFrank,0.0,0,1,1,Diana,0
 Kïlgharrah,0.0,0,1,0,Kassadin,20-3-2022 15:16
 Kytelol,0.0,0,1,0,Samira,0
+Kyblik,0.0,0,1,0,Zyra,18-5-2023 21:41
 Kudoria,0.0,0,1,0,Zed,0
 KraftDurchSuppe,0.0,0,1,0,Brand,0
 Konny Feting,0.0,0,1,1,Morgana,0
@@ -568,6 +577,7 @@ Dann Bones,0.0,0,1,1,Khazix,0
 Daetaetoktril,0.0,0,1,1,Nami,0
 Dacre Montgomery,0.0,0,1,1,Trundle,4-8-2022 22:7
 Daavzer,0.0,0,1,1,Lux,0
+DaRealWeapon,0.0,0,1,0,Jax,18-5-2023 21:41
 DYPsykox,0.0,0,1,1,Fizz,0
 DAOBHER,0.0,0,1,0,Lissandra,0
 DANÌELE,0.0,0,1,0,Teemo,4-8-2022 22:7

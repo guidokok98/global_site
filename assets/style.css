@@ -486,26 +486,17 @@ a {
 }
 /*select menu text and background, not hover version*/
 .Select-control, .Select-menu-outer, .Select-multi-value-wrapper, .select-up, .is-open .Select-control {
-  background-color: #141414;
+  background-color: #ffffff;
   color: rgb(0, 0, 0);
-
 }
 
-#modelselector .Select-control{
+/* #modelselector .Select-control{
   max-height: 82px;
   overflow-y: auto;
   margin: 0px 0px -3px 0px;
   border: 0.5px solid #dbdbdb44;
-}
+} */
 
-.Select-control{
-  border: 0.5px solid #dbdbdb44;
-}
-
-.has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
-  color: red;
-  background-color: #FFF;
-}
 ._dash-app-content {
   overflow-x: hidden;
   overflow-y: hidden;
