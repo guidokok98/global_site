@@ -1,6 +1,7 @@
 map,played,won,won_with_first_blood,lost_with_first_blood,won_with_first_tower,lost_with_first_tower,won_with_first_b&t,lost_with_first_b&t,won_with_first_inibitor,lost_with_first_inibitor,won_with_all,lost_with_all,winrate,lost with_all
+ARAM,86.0,42,27,14,29,17,17,8,34,10,17,5,48.84,0
 CLASSIC,81.0,40,26,17,27,15,20,8,30,11,15,4,49.38,0
-ARAM,69.0,34,22,11,22,13,13,6,27,7,13,4,49.28,0
 URF,19.0,8,6,5,7,6,6,3,6,4,6,0,42.11,0
 ONEFORALL,16.0,7,5,3,3,1,2,0,7,0,2,0,43.75,0
 ULTBOOK,9.0,4,3,3,3,0,3,0,4,0,3,0,44.44,0
+NEXUSBLITZ,3.0,1,0,2,0,0,0,0,0,0,0,0,33.33,0

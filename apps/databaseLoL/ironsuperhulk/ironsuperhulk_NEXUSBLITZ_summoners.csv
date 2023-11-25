@@ -1,45 +1,231 @@
-summoner_name,played_with,won_with,played_against,lost_against,last_played
-yvan i am,6.0,4,0,0,Swain
-ironsuperhulk,6.0,4,0,0,Senna
-BluezamX,6.0,4,0,0,Rammus
-MCB Sensific,2.0,1,0,0,Sylas
-Tittendachs69,1.0,1,0,0,Gragas
-THE WATERMELON,1.0,1,0,0,Sylas
-Sielthrim,1.0,1,0,0,Nocturne
-Schruht,1.0,1,0,0,Kaisa
-Makuura,1.0,1,0,0,Lux
-Kritrion,1.0,1,0,0,Ezreal
-A Cutie Raccoon,1.0,1,0,0,Quinn
-Vaynished,1.0,0,0,0,Ezreal
-Schal,1.0,0,0,0,Akali
-Pefratahhaaland,1.0,0,0,0,LeeSin
-willywltoro,0.0,0,1,0,Qiyana
-viFect,0.0,0,1,0,Tryndamere
-tahmth3frog,0.0,0,1,0,Hecarim
-sokjose,0.0,0,1,0,Pyke
-propvp99,0.0,0,1,1,Viktor
-estacionamento,0.0,0,1,1,Lucian
-darkpatroskon,0.0,0,1,0,Morgana
-bananero57,0.0,0,1,1,Darius
-VaIIey,0.0,0,1,0,Ezreal
-TheRealIsog,0.0,0,1,0,Nunu
-TheGreenShadow5,0.0,0,1,0,Ryze
-The eBay Animal,0.0,0,1,1,Qiyana
-Teelox45,0.0,0,1,0,Diana
-Peperoni631,0.0,0,1,0,Zed
-PanRedMark,0.0,0,1,0,Katarina
-PMPB,0.0,0,1,1,MasterYi
-OSxCait ,0.0,0,1,0,Sett
-NT Jax,0.0,0,1,0,Talon
-Mohansson,0.0,0,1,0,Annie
-Moezark,0.0,0,1,1,Varus
-Maretyu,0.0,0,1,0,Chogath
-Mamepin,0.0,0,1,1,LeeSin
-LegendaryHairy,0.0,0,1,0,Gwen
-IN1KI,0.0,0,1,0,Gangplank
-GasAll,0.0,0,1,1,LeeSin
-Cunhaaa,0.0,0,1,1,Zed
-Caña,0.0,0,1,0,Shaco
-Arkeyt,0.0,0,1,1,Brand
-Alexandro2021,0.0,0,1,0,Twitch
-ASAOOO,0.0,0,1,0,TahmKench
+summoner_name,played_with,won_with,played_against,lost_against,date,last_played
+ironsuperhulk,26.0,15,0,0,22-11-2023 9:28,Poppy
+Drututts Femboy,2.0,1,0,0,20-11-2023 10:14,Brand
+xHopeeR,1.0,1,0,0,16-11-2023 11:56,Zyra
+warfare719,1.0,1,0,0,20-11-2023 10:14,Jhin
+theDarkestOrange,1.0,1,0,0,12-11-2023 13:25,Aphelios
+panoramix38,1.0,1,0,0,20-11-2023 10:14,Ziggs
+miljoonakala,1.0,1,0,0,16-11-2023 11:57,Brand
+marlonfrz,1.0,1,0,0,16-11-2023 11:56,Illaoi
+kathy,1.0,1,0,0,22-11-2023 9:28,Kaisa
+badkee1,1.0,1,0,0,12-11-2023 13:25,Jinx
+Yobrebre,1.0,1,0,0,12-11-2023 13:24,Naafiri
+XerecaMan,1.0,1,0,0,22-11-2023 9:28,Fiora
+Whaisler,1.0,1,0,0,22-11-2023 9:28,Thresh
+TheMrRapy,1.0,1,0,0,22-11-2023 9:28,Akali
+Thcito,1.0,1,0,0,22-11-2023 9:28,Viego
+ThatPickled,1.0,1,0,0,20-11-2023 10:14,Sett
+Sydney Bronson,1.0,1,0,0,12-11-2023 13:25,Volibear
+Stenen,1.0,1,0,0,12-11-2023 13:25,Samira
+Sozer266,1.0,1,0,0,16-11-2023 11:57,Samira
+Shangzi,1.0,1,0,0,16-11-2023 11:56,Briar
+Shamahnus,1.0,1,0,0,12-11-2023 13:25,Sett
+SatoRowlet,1.0,1,0,0,12-11-2023 13:25,Morgana
+Saree3,1.0,1,0,0,12-11-2023 13:25,LeeSin
+SHENONSHR00MS,1.0,1,0,0,12-11-2023 13:25,AurelionSol
+RoboW8itch,1.0,1,0,0,12-11-2023 13:25,TahmKench
+Ralutz,1.0,1,0,0,16-11-2023 11:57,Aphelios
+Pluro,1.0,1,0,0,22-11-2023 9:28,Milio
+PIusle,1.0,1,0,0,22-11-2023 9:28,Caitlyn
+OrteilDeKim GLOW,1.0,1,0,0,12-11-2023 13:25,Nasus
+Ogariyin,1.0,1,0,0,12-11-2023 13:24,Shaco
+OG KUSH 50,1.0,1,0,0,16-11-2023 11:57,Sylas
+Naserfnz,1.0,1,0,0,12-11-2023 13:25,Yasuo
+Muwu,1.0,1,0,0,22-11-2023 9:28,Lillia
+Muchacho Teemo,1.0,1,0,0,12-11-2023 13:25,Volibear
+MrDeathPaw,1.0,1,0,0,22-11-2023 9:28,Skarner
+Moninn,1.0,1,1,0,16-11-2023 11:57,KSante
+Moktao,1.0,1,0,0,16-11-2023 11:57,Ashe
+Manuelsito,1.0,1,0,0,20-11-2023 10:14,Garen
+MASTER Parasyt,1.0,1,0,0,16-11-2023 11:56,Viego
+Lemonsito0w0,1.0,1,0,0,12-11-2023 13:24,Akali
+Le Settième ciel,1.0,1,0,0,22-11-2023 9:28,Yasuo
+Kledornn,1.0,1,0,0,16-11-2023 11:57,AurelionSol
+KerN239,1.0,1,0,0,16-11-2023 11:57,Udyr
+Jost99,1.0,1,0,0,16-11-2023 11:57,Lux
+Jeeveezee,1.0,1,0,0,20-11-2023 10:14,Graves
+Hxris,1.0,1,0,0,12-11-2023 13:25,Karma
+Hitozzy,1.0,1,0,0,20-11-2023 10:14,Quinn
+Hi i m F3rox,1.0,1,0,0,16-11-2023 11:57,Aphelios
+Handsome B Guay,1.0,1,0,0,20-11-2023 10:14,Shen
+Galvarie,1.0,1,0,0,12-11-2023 13:25,Lux
+Freakorino,1.0,1,0,0,16-11-2023 11:57,Brand
+Don Krogo,1.0,1,0,0,16-11-2023 11:57,TahmKench
+Der Batzen,1.0,1,0,0,16-11-2023 11:57,Yasuo
+DeathVolcano,1.0,1,0,0,16-11-2023 11:57,Graves
+DRlLL,1.0,1,0,0,12-11-2023 13:25,Darius
+ChocoWhale,1.0,1,0,0,22-11-2023 9:28,Taliyah
+Chefscout,1.0,1,0,0,16-11-2023 11:57,Maokai
+Bu Yao Ni Li Kai,1.0,1,0,0,12-11-2023 13:25,Camille
+BlankHDXD,1.0,1,0,0,12-11-2023 13:24,Velkoz
+Aabade,1.0,1,0,0,22-11-2023 9:28,Volibear
+2Wee PaGna,1.0,1,0,0,20-11-2023 10:14,Ashe
+zarakikenpachi78,1.0,0,0,0,20-11-2023 10:14,Swain
+siul001,1.0,0,0,0,20-11-2023 10:14,Ezreal
+plinoir,1.0,0,0,0,20-11-2023 10:14,Kaisa
+phu230798,1.0,0,0,0,12-11-2023 13:25,Tristana
+letalcobra23,1.0,0,0,0,16-11-2023 11:57,Rumble
+jdrixXd,1.0,0,0,0,12-11-2023 13:25,Yone
+iX4n,1.0,0,0,0,20-11-2023 10:14,MissFortune
+crujecrustir,1.0,0,0,0,20-11-2023 10:14,Zilean
+aarij09,1.0,0,0,0,12-11-2023 13:25,Darius
+Yung Slime,1.0,0,0,0,12-11-2023 13:24,Pyke
+Wsh tu nehess,1.0,0,0,0,20-11-2023 10:14,Yasuo
+UrHotStepSister,1.0,0,0,0,12-11-2023 13:24,Leblanc
+Tre3some,1.0,0,0,0,16-11-2023 11:57,Maokai
+TorvikGG,1.0,0,0,0,16-11-2023 11:57,Yone
+THX Support,1.0,0,0,0,20-11-2023 10:14,Maokai
+Sorry If l Feed,1.0,0,0,0,16-11-2023 11:57,Jax
+Smozii,1.0,0,0,0,12-11-2023 13:24,Seraphine
+PoseyBoy,1.0,0,0,0,12-11-2023 13:25,Syndra
+NicolacTheReturn,1.0,0,0,0,16-11-2023 11:57,Shaco
+Neekocopter,1.0,0,0,0,12-11-2023 13:24,Neeko
+NayaSakia,1.0,0,0,0,12-11-2023 13:24,Jhin
+Mushimaster,1.0,0,0,0,20-11-2023 10:14,Azir
+MissHeisenberg18,1.0,0,0,0,20-11-2023 10:14,Ashe
+LunaFootjob,1.0,0,0,0,20-11-2023 10:14,TahmKench
+King of Shadows1,1.0,0,0,0,20-11-2023 10:14,Naafiri
+Jazon Momoé,1.0,0,1,0,20-11-2023 10:14,Caitlyn
+JannGs,1.0,0,0,0,20-11-2023 10:14,Kaisa
+I Akalimetalle I,1.0,0,0,0,12-11-2023 13:25,Yone
+Hyper Yoda,1.0,0,0,0,12-11-2023 13:24,Yone
+HiImVV,1.0,0,0,0,12-11-2023 13:24,Urgot
+Heroinwagón,1.0,0,0,0,12-11-2023 13:25,Ornn
+Haiderrr,1.0,0,0,0,16-11-2023 11:57,Twitch
+Gioupou,1.0,0,0,0,20-11-2023 10:14,MissFortune
+Duck4You,1.0,0,0,0,16-11-2023 11:57,JarvanIV
+Derallabestehier,1.0,0,0,0,12-11-2023 13:25,Yasuo
+Das Mahin,1.0,0,0,0,20-11-2023 10:14,MasterYi
+D0Texe,1.0,0,0,0,12-11-2023 13:25,Rell
+Chanoir,1.0,0,0,0,16-11-2023 11:57,Nidalee
+Bruc3L33,1.0,0,0,0,12-11-2023 13:24,Trundle
+BiggestBicepEver,1.0,0,0,0,16-11-2023 11:57,Talon
+Balestra123,1.0,0,0,0,16-11-2023 11:57,Aatrox
+BTRDevil,1.0,0,0,0,16-11-2023 11:57,Jhin
+Artorias69,1.0,0,0,0,16-11-2023 11:57,Irelia
+Šäufer,0.0,0,1,1,12-11-2023 13:24,Jinx
+œøœ,0.0,0,1,1,20-11-2023 10:14,Lissandra
+µTimeµ,0.0,0,1,1,20-11-2023 10:14,Samira
+xΒarbies Daddy,0.0,0,1,0,16-11-2023 11:57,Twitch
+xXLeviathaniaXx,0.0,0,1,1,20-11-2023 10:14,Zed
+waeuschen,0.0,0,1,0,22-11-2023 9:28,Kayle
+tsheep,0.0,0,1,0,12-11-2023 13:25,Yone
+retraain,0.0,0,1,1,12-11-2023 13:24,Tristana
+potongo,0.0,0,1,0,20-11-2023 10:14,KSante
+pirolopez7,0.0,0,1,1,16-11-2023 11:57,Jayce
+pinkarrow91,0.0,0,1,0,16-11-2023 11:57,MissFortune
+neveski,0.0,0,1,0,16-11-2023 11:57,Senna
+maybefiasco,0.0,0,1,1,20-11-2023 10:14,Heimerdinger
+luvanht,0.0,0,1,1,12-11-2023 13:24,Yone
+lS3eeD,0.0,0,1,1,16-11-2023 11:57,LeeSin
+jowifesboyfriend,0.0,0,1,0,20-11-2023 10:14,Kaisa
+jjz,0.0,0,1,0,22-11-2023 9:28,Brand
+inting hügi,0.0,0,1,1,16-11-2023 11:57,Corki
+hopekiller,0.0,0,1,1,12-11-2023 13:24,Swain
+hizokaA,0.0,0,1,0,12-11-2023 13:25,Tristana
+heungame,0.0,0,1,1,12-11-2023 13:25,Fizz
+hearthland,0.0,0,1,1,12-11-2023 13:25,Anivia
+femboγ lover,0.0,0,1,0,12-11-2023 13:25,Belveth
+feinuu,0.0,0,1,0,12-11-2023 13:25,Karthus
+dap,0.0,0,1,0,12-11-2023 13:25,Belveth
+carapasa,0.0,0,1,1,16-11-2023 11:57,Kayle
+Zole420,0.0,0,1,1,12-11-2023 13:25,Blitzcrank
+Zeyroxs,0.0,0,1,0,12-11-2023 13:25,Gragas
+Zedink,0.0,0,1,0,22-11-2023 9:28,Briar
+Yehohanan1133,0.0,0,1,0,22-11-2023 9:28,Galio
+Xterain,0.0,0,1,1,16-11-2023 11:57,Veigar
+WuZheTian1,0.0,0,1,1,20-11-2023 10:14,Sett
+WoodGarou,0.0,0,1,0,12-11-2023 13:25,Warwick
+Willgate,0.0,0,1,0,12-11-2023 13:25,Sivir
+Wezaemoη,0.0,0,1,0,12-11-2023 13:25,Garen
+UppyCarry,0.0,0,1,1,20-11-2023 10:14,Gangplank
+TxipOO,0.0,0,1,0,16-11-2023 11:57,DrMundo
+Trynkzer,0.0,0,1,1,16-11-2023 11:57,TahmKench
+The Darken Blade,0.0,0,1,0,16-11-2023 11:57,Briar
+Tea Man,0.0,0,1,0,20-11-2023 10:14,Gragas
+TBC Ferwi,0.0,0,1,0,20-11-2023 10:14,Sion
+St Lukes,0.0,0,1,0,12-11-2023 13:24,Sylas
+Shoraba,0.0,0,1,0,12-11-2023 13:24,Blitzcrank
+SharonCarriesYou,0.0,0,1,0,16-11-2023 11:57,Graves
+Serhou Guirassy,0.0,0,1,0,22-11-2023 9:28,Neeko
+Scuro22,0.0,0,1,1,20-11-2023 10:14,Rengar
+SanPedro Ayúdame,0.0,0,1,1,16-11-2023 11:57,Velkoz
+Salieri204,0.0,0,1,1,20-11-2023 10:14,AurelionSol
+SYLASVIEGOHENTAI,0.0,0,1,0,12-11-2023 13:25,Viego
+SORRY YOU LOSE ,0.0,0,1,0,22-11-2023 9:28,Nasus
+SKZPHRNC,0.0,0,1,1,20-11-2023 10:14,Darius
+Rockrider34,0.0,0,1,1,20-11-2023 10:14,Jax
+PupswichtelXD,0.0,0,1,0,16-11-2023 11:57,Jax
+Pompoty,0.0,0,1,0,22-11-2023 9:28,Lux
+PapaF0rmigas,0.0,0,1,0,22-11-2023 9:28,Shaco
+OhHeeeelllNooo,0.0,0,1,0,16-11-2023 11:57,JarvanIV
+Oh Billy ,0.0,0,1,1,16-11-2023 11:57,Briar
+Noxempire,0.0,0,1,0,12-11-2023 13:25,Caitlyn
+NewYoshii,0.0,0,1,0,12-11-2023 13:25,Mordekaiser
+Mârry,0.0,0,1,1,12-11-2023 13:24,Seraphine
+Mutiara,0.0,0,1,0,20-11-2023 10:14,Morgana
+Mio Chibana,0.0,0,1,0,12-11-2023 13:24,Ezreal
+Meister Krätzer,0.0,0,1,0,12-11-2023 13:25,Ahri
+Meatpotatogun,0.0,0,1,1,12-11-2023 13:25,DrMundo
+McDonaldsforkids,0.0,0,1,0,20-11-2023 10:14,Veigar
+MasaterB28,0.0,0,1,1,20-11-2023 10:14,MissFortune
+MarcelRonan,0.0,0,1,0,22-11-2023 9:28,Mordekaiser
+ManisPlays04,0.0,0,1,0,12-11-2023 13:25,Orianna
+Mangorine24,0.0,0,1,0,12-11-2023 13:25,Renata
+MOHG MOMENT,0.0,0,1,0,12-11-2023 13:25,Xerath
+Lììsa,0.0,0,1,1,20-11-2023 10:14,Braum
+Lya Ly,0.0,0,1,0,22-11-2023 9:28,Jhin
+Littlemasterfe,0.0,0,1,1,20-11-2023 10:14,Nocturne
+LiquidMiracle AI,0.0,0,1,0,22-11-2023 9:28,Udyr
+Lapone24,0.0,0,1,0,16-11-2023 11:57,Jax
+Kaii δ,0.0,0,1,0,16-11-2023 11:57,Katarina
+KATARINA MACHINE,0.0,0,1,1,16-11-2023 11:57,Katarina
+JustanAverageBoi,0.0,0,1,1,12-11-2023 13:25,Gnar
+JhinÝ,0.0,0,1,0,16-11-2023 11:57,Pyke
+Jedw1,0.0,0,1,1,16-11-2023 11:57,Azir
+J3XXXTER,0.0,0,1,0,16-11-2023 11:57,Ziggs
+Irish Girl,0.0,0,1,1,12-11-2023 13:24,Ashe
+Impolite Clown,0.0,0,1,0,16-11-2023 11:56,Viego
+Il Signor Benito,0.0,0,2,1,16-11-2023 11:57,Vex
+HÎJOX,0.0,0,1,0,12-11-2023 13:25,Kled
+Hyrus,0.0,0,1,0,20-11-2023 10:14,Volibear
+Hobomatt,0.0,0,1,0,16-11-2023 11:57,Blitzcrank
+Hipoglúcido,0.0,0,1,1,12-11-2023 13:25,Heimerdinger
+HRTS Alttodi,0.0,0,1,0,20-11-2023 10:14,TahmKench
+Gorkas,0.0,0,1,0,22-11-2023 9:28,Jax
+GladiVaynetor,0.0,0,1,0,12-11-2023 13:25,Azir
+GamerJasp,0.0,0,1,0,16-11-2023 11:57,Yasuo
+Fun W molly,0.0,0,1,1,16-11-2023 11:57,Nunu
+FrogiStealer,0.0,0,1,0,22-11-2023 9:28,Nocturne
+Fhakear,0.0,0,1,0,22-11-2023 9:28,Khazix
+Fetts Geodreieck,0.0,0,1,1,20-11-2023 10:14,Fizz
+FIaqueDePisse,0.0,0,1,1,20-11-2023 10:14,Ekko
+EonPvP,0.0,0,1,1,20-11-2023 10:14,Caitlyn
+Ens Inimicus ,0.0,0,1,0,16-11-2023 11:57,Gangplank
+Edéeffe,0.0,0,1,0,16-11-2023 11:56,Ezreal
+EINS Lurth,0.0,0,1,1,16-11-2023 11:57,Pantheon
+Dirnenspross 69,0.0,0,1,1,20-11-2023 10:14,Veigar
+Dezsadou,0.0,0,1,0,22-11-2023 9:28,Caitlyn
+DeGaper,0.0,0,1,0,16-11-2023 11:57,Teemo
+DawnWxlker,0.0,0,1,1,16-11-2023 11:57,Mordekaiser
+Darkened999,0.0,0,1,1,12-11-2023 13:24,Sett
+Damage1710,0.0,0,1,1,12-11-2023 13:25,Elise
+DEADLIFT150KG,0.0,0,1,1,20-11-2023 10:14,Teemo
+Coomy,0.0,0,1,1,20-11-2023 10:14,Maokai
+Children F1STER,0.0,0,1,0,12-11-2023 13:25,Zed
+Chapss82,0.0,0,1,0,12-11-2023 13:25,Caitlyn
+BoHjava,0.0,0,1,0,12-11-2023 13:24,Thresh
+Bipppo,0.0,0,1,0,16-11-2023 11:57,Qiyana
+Big ass nurgling,0.0,0,1,1,12-11-2023 13:24,Aatrox
+Beńx,0.0,0,1,0,16-11-2023 11:57,Nidalee
+Better Call Saul,0.0,0,1,1,16-11-2023 11:57,Fiddlesticks
+Bemoc,0.0,0,1,0,20-11-2023 10:14,Sejuani
+BartolomeLaw,0.0,0,1,1,20-11-2023 10:14,Zyra
+BadBunnyBABY,0.0,0,1,1,12-11-2023 13:24,Anivia
+BETACÚCK,0.0,0,1,1,12-11-2023 13:25,Teemo
+ArtXir,0.0,0,1,0,16-11-2023 11:56,Ekko
+Arrfur,0.0,0,2,0,16-11-2023 11:57,Garen
+Andrømache,0.0,0,1,0,20-11-2023 10:14,Nidalee
+Alzheimerdingér,0.0,0,1,1,12-11-2023 13:24,Jax
+Adrasthé,0.0,0,1,1,12-11-2023 13:25,Xayah
+3than,0.0,0,1,1,12-11-2023 13:25,Vayne

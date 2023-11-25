@@ -1,0 +1,4 @@
+champion_id,champion_name,played,won,kills,deaths,assists,average_damage_dealt,average_damage_taken,damage_diff,double_kills,triple_kills,quadra_kills,penta_kills,unreal_kills,average_healing_done,cc_score,winrate
+236,Lucian,1.0,1,13,11,12,31678,30477,1201,2,1,0,0,0,5880,2,100
+81,Ezreal,1.0,0,16,7,14,46529,27067,19462,1,0,0,0,0,9438,9,0
+202,Jhin,1.0,0,4,6,5,14244,14241,3,0,0,0,0,0,2020,38,0
