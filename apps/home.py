@@ -80,9 +80,12 @@ def update_links(n):
               prevent_initial_call=True)
 
 def start_torrent(n_clicks):
+    print("start torrent")
     print(os.system("ls ./"))
-    os.system('sh ./mountUSB.sh')
-    os.system('sh ./torrent_client.sh')
+    os.system('sh /home/pi/mountUSB.sh')
+    print("usb mounted")
+    os.system('sh /home/pi/torrent_client.sh')
+    print("client started")
     return [html.Span('Start Torrent server', style={'color': 'white'})]
 
 @app.callback(Output('update-restarttxt', 'children'),
