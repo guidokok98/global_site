@@ -49,6 +49,14 @@ layout = html.Div(children=[
                                             ]),
                                             html.Div([
                                                 dcc.Dropdown(
+                                                    id='choose-version',
+                                                    multi=False,
+                                                    clearable=False,
+                                                    ),
+                                                    ],style={'width': '10%', 'float': 'left'}
+                                                ),
+                                            html.Div([
+                                                dcc.Dropdown(
                                                     id='choose-map',
                                                     multi=False,
                                                     clearable=False,
@@ -69,7 +77,7 @@ layout = html.Div(children=[
                                                     multi=True,
                                                     clearable=False,
                                                     ),
-                                                    ],style={'width': '70%', 'float': 'right'}
+                                                    ],style={'width': '60%', 'float': 'right'}
                                             ),
                                   #the right side
                                   html.Br(),
@@ -167,15 +175,41 @@ def update_stats(status):
     status = 'Done'
     return [html.Span('{}'.format(status), style={'color': 'white'})]
 
-
 @app.callback(
-    Output('choose-map', 'options'),Output('choose-map', 'value'),
+    Output('choose-version', 'options'),Output('choose-version', 'value'),
     Input('update-done', 'children'),
     prevent_initial_call=True
 )
-def choose_maps(n):
+def choose_version(n):
     path = str(Path(__file__).parent.absolute())
     path = path+'/databaseLoL/'+summonerName+'/'
+    versions = []
+    print("path: ", path)
+    for folder in sorted(os.listdir(path), reverse = True):
+      # Instantiating the path of the file
+        file_path = f'{path}/{folder}'
+        # Checking whether the given file is a directory or not
+        if os.path.isdir(file_path):
+            print("folder: ", folder)
+            try:
+                # Printing the file pertaining to file_path
+                row = {}
+                row['label'] = folder
+                row['value'] = folder
+                versions.append(row)
+            except:
+                None
+    print("versions: ", versions)
+    return versions, versions[0]['value']
+
+@app.callback(
+    Output('choose-map', 'options'),Output('choose-map', 'value'),
+    Input('choose-version', 'value'),
+    prevent_initial_call=True
+)
+def choose_maps(version):
+    path = str(Path(__file__).parent.absolute())
+    path = path+'/databaseLoL/'+summonerName+'/'+version+'/'
     maps = []
 
     for file in sorted(os.listdir(path)) :
@@ -203,15 +237,17 @@ def choose_maps(n):
     return maps, maps[0]['value']
 @app.callback(
     Output('choose-stats', 'options'),Output('choose-stats', 'value'),
+    Input('choose-version', 'value'),
     Input('choose-map', 'value'),
+    
     prevent_initial_call=True
 )
-def update_database_dropdown(chosenMap):
+def update_database_dropdown(version, chosenMap):
     global summonerName
     global path
     global options
     path = str(Path(__file__).parent.absolute())
-    path = path+'/databaseLoL/'+summonerName+'/'
+    path = path+'/databaseLoL/'+summonerName+'/'+version+'/'
     # Iterating over all the files
     options = []
     for file in sorted(os.listdir(path)) :

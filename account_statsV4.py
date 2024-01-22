@@ -123,6 +123,8 @@ class player:
         except:
             try:
                 os.makedirs(self.direct)
+                os.makedirs(self.direct+"/all")
+                os.makedirs(self.direct+"/all"+"/all")
             except:
                 None
             self.lastGame = 0
@@ -136,20 +138,24 @@ class player:
     #loads the given Df
     def loadDf(self, dfName, version):
         try:
-            print("loadDf: ",self.direct+ "/v"+ version+'/'+self.userName+'_'+dfName+'.csv')
-            self.selectedDf = pd.read_csv(r''+self.direct+ "/v"+ version+'/'+self.userName+'_'+dfName+'.csv')
+            print("loadDf: ",self.direct+ "/v"+ version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv')
+            self.selectedDf = pd.read_csv(r''+self.direct+ "/v"+version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv')
         except:
             self.selectedDf = pd.DataFrame()
         return self.selectedDf
     #saves the given df
     def saveDf(self, dfName, sort, version, ascending = False):
         try:
-            os.makedirs(self.direct+ "/v"+ version)
+            os.makedirs(self.direct+ "/v"+ version.split(".")[0]+'/'+version)
+        except:
+            None
+        try:
+            os.makedirs(self.direct+ "/v"+ version.split(".")[0]+'/'+"all")
         except:
             None
         saved = False
         self.selectedDf = self.selectedDf.sort_values(by=sort, ascending = ascending)
-        saveName = ''+self.direct+ "/v"+ version+'/'+self.userName+'_'+dfName+'.csv'
+        saveName = ''+self.direct+ "/v"+version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv'
         while saved == False:
             try:
                 self.selectedDf.to_csv(saveName, index=False)
