@@ -45,6 +45,7 @@ class mh_z19c:
         self.ser.close()
         if len(s) >= 4 and s[0] == 0xff and s[1] == 0x86 and ord(self.checksum(s[1:-1])) == s[-1]:
           return (s[2]<<8) + s[3]
-      except:
+      except Exception as error:
          traceback.print_exc()
+         print("readout failed, ", error)
       return -1

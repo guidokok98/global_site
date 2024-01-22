@@ -50,10 +50,6 @@ layout = html.Div(children=[
                                       dcc.Link('Torrent downloader', href='http://192.168.0.165:8060/', refresh=True),
                                       html.Br(),
                                       html.Br(),
-                                      html.Button(id='startTorrent-button', n_clicks=0, children='Start Torrent', style={'color': 'white', 'float': 'middle'}),
-                                      html.Br(),
-                                      html.Div(id='update-torrenttxt'),
-                                      html.Br(),
                                       html.Button(id='restartPi-button', n_clicks=0, children='Restart Pi', style={'color': 'white', 'float': 'middle'}),
                                       html.Br(),
                                       html.Div(id='update-restarttxt'),
@@ -74,19 +70,6 @@ def update_links(n):
         pagesList.append(dcc.Link(page['label'], href=page['value']))
         pagesList.append(html.Br())
     return pagesList
-
-@app.callback(Output('update-torrenttxt', 'children'),
-              Input('startTorrent-button', 'n_clicks'),
-              prevent_initial_call=True)
-
-def start_torrent(n_clicks):
-    print("start torrent")
-    print(os.system("ls ./"))
-    os.system('sh /home/pi/mountUSB.sh')
-    print("usb mounted")
-    os.system('sh /home/pi/torrent_client.sh')
-    print("client started")
-    return [html.Span('Start Torrent server', style={'color': 'white'})]
 
 @app.callback(Output('update-restarttxt', 'children'),
               Input('restartPi-button', 'n_clicks'),

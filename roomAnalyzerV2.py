@@ -82,7 +82,7 @@ bme680.setBitHigh(0x74, 0)
 while((bme680.readReg(0x1D)&0b100000) == 1):
     None
 
-while 1:
+while True:
     startTime = time.time()
     timeDate, timeHMS = convTimeStamp()
     dfParam = openDatabase(path, 'parameters')
@@ -98,10 +98,10 @@ while 1:
     localTemp1 = localTemp()
     co2Val = co2Sensor.read_concentration()
     pm25, pm100 = dustSensor.readout()
-    print(f'pm25{pm25}, pm100{pm100}')
+    print(f'pm25: {pm25}, pm100: {pm100}')
     if localTemp1 != 'None':
         outsideTemp = localTemp1
-    #print(f'temp: {temp}C \t humi: {humi}% \t press: {press}Pa \t gasRes: {gasRes}Ohm \t outside temp: {outsideTemp} C')
+    print(f'temp: {temp}C \t humi: {humi}% \t co2: {co2Val} \t pm25: {pm25} \t pm100: {pm100} \t press: {press}Pa \t gasRes: {gasRes} Ohm \t outside temp: {outsideTemp} C')
     if humi <= 100.0:
         row['date'] =timeDate
         row['timeStamp'] =timeHMS
@@ -114,9 +114,9 @@ while 1:
         row['pressure'] = press
         row['gasResistance'] = gasRes
         #adds the value of bsec output to the database
-        dfBsec = openDatabase((path+'/bsec/'), 'bsec_data')
-        for val in dfBsec:
-            row['bsec '+val] = dfBsec[val][0]
+       # dfBsec = openDatabase((path+'/bsec/'), 'bsec_data')
+       # for val in dfBsec:
+       #     row['bsec '+val] = dfBsec[val][0]
         
         df = openDatabase(pathLoc, timeDate)
         df = df.append(row, ignore_index=True)
