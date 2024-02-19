@@ -1,0 +1,6 @@
+champion_id,champion_name,played,won,kills,deaths,assists,average_damage_dealt,average_damage_taken,damage_diff,double_kills,triple_kills,quadra_kills,penta_kills,unreal_kills,average_healing_done,cc_score,winrate
+427,Ivern,2.0,2,4,20,78,17875,22847,-4972,0,0,0,0,0,3426,76,100
+61,Orianna,1.0,1,8,2,56,28998,19441,9557,1,0,0,0,0,5260,23,100
+161,Velkoz,1.0,1,12,10,27,29310,25122,4188,0,0,0,0,0,3741,34,100
+254,Vi,1.0,1,12,10,14,18661,24250,-5589,2,0,0,0,0,1043,25,100
+202,Jhin,1.0,0,8,11,22,14196,29160,-14964,0,0,0,0,0,4105,26,0

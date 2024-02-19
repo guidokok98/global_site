@@ -12,7 +12,13 @@ import os #use os.system('sudo shutdown -r now') to reboot if error encountered
 from bme680 import *
 from mh_z19c import *
 from sds011 import *
+from internetSpeedTester import *
 
+def tryXpect(function, params):
+    try:
+        return function(params)
+    except:
+        return "error"
 #converts time from epoch to date and Hours Minutes and Seconds
 def convTimeStamp():
     storedTime = time.time()
@@ -76,7 +82,10 @@ path = str(Path(__file__).parent.absolute())
 path = path+'/apps/database_roomAnalyzer'
 bme680 = bme680(0x77)
 co2Sensor = mh_z19c()
-dustSensor = sds011()
+try:
+	dustSensor = sds011()
+except:
+	dustSensor = 'error'
 #set sensor in force mode
 bme680.setBitHigh(0x74, 0)
 while((bme680.readReg(0x1D)&0b100000) == 1):
@@ -97,8 +106,18 @@ while True:
     gasRes = bme680.getGasRes()
     localTemp1 = localTemp()
     co2Val = co2Sensor.read_concentration()
-    pm25, pm100 = dustSensor.readout()
-    print(f'pm25: {pm25}, pm100: {pm100}')
+    if dustSensor != 'error':
+        pm25, pm100 = dustSensor.readout()
+    else:
+        pm25= -1.0
+        pm100= -1.0
+    try:
+        resultDownload, resultUpload, ping = getNetSpeed()
+    except:
+        resultDownload = -1.0
+        resultUpload = -1.0
+        ping = -1.0
+
     if localTemp1 != 'None':
         outsideTemp = localTemp1
     print(f'temp: {temp}C \t humi: {humi}% \t co2: {co2Val} \t pm25: {pm25} \t pm100: {pm100} \t press: {press}Pa \t gasRes: {gasRes} Ohm \t outside temp: {outsideTemp} C')
@@ -113,6 +132,9 @@ while True:
         row['pm10'] = pm100
         row['pressure'] = press
         row['gasResistance'] = gasRes
+        row['download speed'] = resultDownload
+        row['upload speed'] = resultUpload
+        row['ping'] = ping
         #adds the value of bsec output to the database
        # dfBsec = openDatabase((path+'/bsec/'), 'bsec_data')
        # for val in dfBsec:

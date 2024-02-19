@@ -44,3 +44,5 @@ sudo sh /home/pi/onBoot.sh&
 #ignore sys.path.append('/path/to/whatever')
 
 @reboot sh /home/pi/onBoot.sh
+
+sudo systemctl enable --now roomAnalyzer.service

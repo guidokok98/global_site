@@ -1,0 +1,4 @@
+champion_id,champion_name,played,won,kills,deaths,assists,average_damage_dealt,average_damage_taken,damage_diff,double_kills,triple_kills,quadra_kills,penta_kills,unreal_kills,average_healing_done,cc_score,winrate
+31,Chogath,1.0,1,18,11,21,26320,73095,-46775,1,0,0,0,0,6327,92,100
+25,Morgana,1.0,0,14,12,47,46650,39205,7445,3,0,0,0,0,12653,84,0
+350,Yuumi,1.0,0,6,10,38,18646,19724,-1078,0,0,0,0,0,15748,29,0

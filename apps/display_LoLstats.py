@@ -3,6 +3,12 @@
 Created on Tue Mar 23 14:58:55 2021
 
 @author: guido
+
+TO DO:
+ - met all moeten de databases gemerged worden!
+ stappenplan:
+ 1. choose_maps verzamelt alle databases als version all is
+ 2. update_statsDropdown merged gewenste databases
 """
 
 # -*- coding: utf-8 -*-
@@ -19,6 +25,7 @@ import pandas as pd
 from dash import dash_table
 #home made libraries
 from account_statsV4 import *
+from dfCombiner import *
 from curGame import *
 #multipage app
 from app import app
@@ -28,6 +35,7 @@ path = str(Path(__file__).parent.absolute())
 path = path+'/databaseLoL/'
 df = pd.DataFrame()
 busy = False
+csvDB = []
 #load the external stylesheet
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -53,7 +61,15 @@ layout = html.Div(children=[
                                                     multi=False,
                                                     clearable=False,
                                                     ),
-                                                    ],style={'width': '10%', 'float': 'left'}
+                                                    ],style={'width': '5%', 'float': 'left'}
+                                                ),
+                                            html.Div([
+                                                dcc.Dropdown(
+                                                    id='choose-subversion',
+                                                    multi=False,
+                                                    clearable=False,
+                                                    ),
+                                                    ],style={'width': '5%', 'float': 'left'}
                                                 ),
                                             html.Div([
                                                 dcc.Dropdown(
@@ -184,13 +200,11 @@ def choose_version(n):
     path = str(Path(__file__).parent.absolute())
     path = path+'/databaseLoL/'+summonerName+'/'
     versions = []
-    print("path: ", path)
     for folder in sorted(os.listdir(path), reverse = True):
       # Instantiating the path of the file
         file_path = f'{path}/{folder}'
         # Checking whether the given file is a directory or not
         if os.path.isdir(file_path):
-            print("folder: ", folder)
             try:
                 # Printing the file pertaining to file_path
                 row = {}
@@ -199,22 +213,77 @@ def choose_version(n):
                 versions.append(row)
             except:
                 None
-    print("versions: ", versions)
     return versions, versions[0]['value']
+
+def folderScan(givenPath, csvDB):
+    """
+    scans through the given path and do tasks
+    """
+    try:
+        for file in os.listdir(givenPath):
+            # Inisiating the path of the file
+            file_path = f"{givenPath}/{file}"
+            # Check if file is a folder, if so go in that folder
+            if os.path.isdir(file_path):
+                newPath = givenPath + "/" + file
+                csvDB = folderScan(newPath, csvDB)
+
+            # check if file is a file, if so copy that file
+            elif (file.endswith(".csv")):
+                csvDB.append(file_path)
+    #if there is an error, save it in txt file
+    except Exception as error:
+        print("path problem: ", str(error))
+    return csvDB
+
+@app.callback(
+    Output('choose-subversion', 'options'),Output('choose-subversion', 'value'),
+    Input('choose-version', 'value'),
+    prevent_initial_call=True
+)
+def choose_subversion(version):
+    global csvDB
+    path = str(Path(__file__).parent.absolute())
+    path = path+'/databaseLoL/'+summonerName+'/'
+    if version == "all":
+        csvDB = folderScan(path,csvDB)
+    
+    path = path+version+'/'
+    subversions = []
+    for folder in sorted(os.listdir(path), reverse = True):
+      # Instantiating the path of the file
+        file_path = f'{path}/{folder}'
+        # Checking whether the given file is a directory or not
+        if os.path.isdir(file_path):
+            try:
+                # Printing the file pertaining to file_path
+                row = {}
+                row['label'] = folder
+                row['value'] = folder
+                subversions.append(row)
+            except:
+                None
+    return subversions, subversions[0]['value']
 
 @app.callback(
     Output('choose-map', 'options'),Output('choose-map', 'value'),
     Input('choose-version', 'value'),
+    Input('choose-subversion', 'value'),
     prevent_initial_call=True
 )
-def choose_maps(version):
+def choose_maps(version, subversion):
+    global csvDB
+    maps = []
     path = str(Path(__file__).parent.absolute())
     path = path+'/databaseLoL/'+summonerName+'/'+version+'/'
-    maps = []
-
-    for file in sorted(os.listdir(path)) :
-      # Instantiating the path of the file
-        file_path = f'{path}/{file}'
+    if version != "all" and subversion == 'all':
+        csvDB = folderScan(path,csvDB)
+    else:
+        path = path+subversion+'/'
+        csvDB = folderScan(path,csvDB)
+    for file_path in sorted(csvDB):
+    # Instantiating the path of the file
+        file = file_path.split("/")[-1]
         # Checking whether the given file is a directory or not
         if os.path.isfile(file_path) and file.endswith(".csv"):
             try:
@@ -238,21 +307,23 @@ def choose_maps(version):
 @app.callback(
     Output('choose-stats', 'options'),Output('choose-stats', 'value'),
     Input('choose-version', 'value'),
+    Input('choose-subversion', 'value'),
     Input('choose-map', 'value'),
     
     prevent_initial_call=True
 )
-def update_database_dropdown(version, chosenMap):
+def update_database_dropdown(version, subversion, chosenMap):
     global summonerName
     global path
     global options
+    global csvDB
     path = str(Path(__file__).parent.absolute())
-    path = path+'/databaseLoL/'+summonerName+'/'+version+'/'
+    path = path+'/databaseLoL/'+summonerName+'/'+version+'/'+subversion+'/'
     # Iterating over all the files
     options = []
-    for file in sorted(os.listdir(path)) :
+    for file_path in sorted(csvDB) :
       # Instantiating the path of the file
-        file_path = f'{path}/{file}'
+        file = file_path.split("/")[-1]
 
         # Checking whether the given file is a directory or not
         if os.path.isfile(file_path) and file.endswith(".csv"):
@@ -260,16 +331,26 @@ def update_database_dropdown(version, chosenMap):
                 # Printing the file pertaining to file_path
                 fileName = file.split('.')[0]
                 mapType = fileName.split('_')[1]
+                fileName = fileName.split('_')[1:]
+                sep = " "
+                fileName = sep.join(fileName)
                 if mapType == chosenMap:
-                    fileName = fileName.split('_')[1:]
-                    sep = " "
-                    fileName = sep.join(fileName)
-                    row = {}
-                    row['label'] = fileName
-                    row['value'] = file
-                    options.append(row)
+
+                    found = False
+                    for i in range(0,len(options),1):
+                        if options[i]['label'] == fileName:
+                            found = True
+                            break
+
+                    if found == False:
+
+                        row = {}
+                        row['label'] = fileName
+                        row['value'] = file
+                        options.append(row)
             except:
                 None
+    # print("options: ", options)
     return options, options[0]['value']
 
 def getOptions(dfTemp):
@@ -328,11 +409,17 @@ def mapStatsPercent(oldDf):
 @app.callback(
     Output('choose-columns', 'options'),Output('choose-columns', 'value'),
     Input('choose-stats', 'value'),
+    Input('choose-map', 'value'),
+    Input('choose-version', 'value'),
+    Input('choose-subversion', 'value'),
     prevent_initial_call=True
 )
-def update_statsDropdown(database):
-    global df
-    df = readCSV(database)
+def update_statsDropdown(database, map, version, subversion):
+    global df, csvDB
+    if version == "all" or subversion == "all":
+        df = dfCombiner(csvDB, map, database)
+    else:
+        df = readCSV(database)
     if database.split('.')[0].split('_')[1] == 'mapStats':
         df = mapStatsPercent(df)
     options = getOptions(df)

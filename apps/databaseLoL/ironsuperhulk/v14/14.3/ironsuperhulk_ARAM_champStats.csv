@@ -1,0 +1,11 @@
+champion_id,champion_name,played_with,won_with,played_against,lost_against,winrate,tot_played
+13,Ryze,0.0,0,2,2,100,2
+60,Elise,0.0,0,1,1,100,1
+24,Jax,0.0,0,1,1,100,1
+57,Maokai,0.0,0,1,1,100,1
+147,Seraphine,0.0,0,1,1,100,1
+711,Vex,1.0,0,0,0,0,1
+50,Swain,1.0,0,0,0,0,1
+555,Pyke,1.0,0,0,0,0,1
+42,Corki,1.0,0,0,0,0,1
+141,Kayn,1.0,0,0,0,0,1

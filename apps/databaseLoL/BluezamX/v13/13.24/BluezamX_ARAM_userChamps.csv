@@ -1,0 +1,5 @@
+champion_id,champion_name,played,won,kills,deaths,assists,average_damage_dealt,average_damage_taken,damage_diff,double_kills,triple_kills,quadra_kills,penta_kills,unreal_kills,average_healing_done,cc_score,winrate
+350,Yuumi,1.0,1,10,9,55,33584,19987,13597,0,0,0,0,0,16356,29,100
+53,Blitzcrank,1.0,1,10,19,24,49053,46102,2951,1,0,0,0,0,1932,67,100
+75,Nasus,1.0,1,6,9,28,16591,30232,-13641,0,0,0,0,0,6054,10,100
+32,Amumu,1.0,0,12,24,32,39529,45881,-6352,2,0,0,0,0,1388,60,0

@@ -251,10 +251,13 @@ layout = html.Div(children=[
                                             html.Div(id='cur-co2'),
                                             html.Div(id='cur-pm25'),
                                             html.Div(id='cur-pm100'),
-                                            html.Div(id='cur-iaq'),
-                                            html.Div(id='cur-voc'),
+                                            # html.Div(id='cur-iaq'),
+                                            # html.Div(id='cur-voc'),
                                             html.Div(id='cur-press'),
                                             html.Div(id='cur-gasRes'),
+                                            html.Div(id='cur-download'),
+                                            html.Div(id='cur-upload'),
+                                            html.Div(id='cur-ping'),
                                             html.Br(),
                                             html.Div([
                                                 html.Span("Temperature compensation (°C): ", style = {'padding': '5px', 'fontSize': '20px', 'color': 'white'}),
@@ -582,24 +585,24 @@ def update_outsideTemp(n):
     style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
     return [html.Span('Outside temperature: {0:0.2f} C \t'.format(temp), style = style)]
 
-@app.callback(Output('cur-iaq', 'children'),
-              Input('live-update-graph', 'figure'))
-def update_iaq(n):
-    global df
-    iaq = df['bsec iaq'][df.shape[0]-1]
-    iaqAcc = iaqAccTab[int(df['bsec iaq_accuracy'][df.shape[0]-1])]
-    iaqDict = chkIAQ(iaq)
-    advice = iaqDict['Action']
-    style = {'padding': '5px', 'fontSize': '20px', 'color': iaqDict['Colour']}
-    return [html.Span('Indoor air quality(iaq)({}) : {} \t'.format((iaqAcc), round(iaq,2)), style = style), html.Span(advice, style = style)]
+# @app.callback(Output('cur-iaq', 'children'),
+#               Input('live-update-graph', 'figure'))
+# def update_iaq(n):
+#     global df
+#     iaq = df['bsec iaq'][df.shape[0]-1]
+#     iaqAcc = iaqAccTab[int(df['bsec iaq_accuracy'][df.shape[0]-1])]
+#     iaqDict = chkIAQ(iaq)
+#     advice = iaqDict['Action']
+#     style = {'padding': '5px', 'fontSize': '20px', 'color': iaqDict['Colour']}
+#     return [html.Span('Indoor air quality(iaq)({}) : {} \t'.format((iaqAcc), round(iaq,2)), style = style), html.Span(advice, style = style)]
 
-@app.callback(Output('cur-voc', 'children'),
-              Input('live-update-graph', 'figure'))
-def update_voc(n):
-    global df
-    voc = df['bsec  breath_voc_equivalent '][df.shape[0]-1]
-    style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
-    return [html.Span('Estimated VOC: {} ppm ({} ppb)\t'.format(round(voc,2), round(voc*1000.,2)), style = style)]
+# @app.callback(Output('cur-voc', 'children'),
+#               Input('live-update-graph', 'figure'))
+# def update_voc(n):
+#     global df
+#     voc = df['bsec  breath_voc_equivalent '][df.shape[0]-1]
+#     style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
+#     return [html.Span('Estimated VOC: {} ppm ({} ppb)\t'.format(round(voc,2), round(voc*1000.,2)), style = style)]
 
 @app.callback(Output('cur-co2', 'children'),
               Input('live-update-graph', 'figure'))
@@ -647,5 +650,28 @@ def update_gasRes(n):
     style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
     return [html.Span('Gas resistance: {0:0.2f} Ohm \t'.format(gasRes), style = style)]
 
+@app.callback(Output('cur-download', 'children'),
+              Input('live-update-graph', 'figure'))
+def update_downSpeed(n):
+    global df
+    downSpeed = df['download speed'][df.shape[0]-1]
+    style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
+    return [html.Span('Download speed: {0:0.2f} mbps \t'.format(downSpeed), style = style)]
+
+@app.callback(Output('cur-upload', 'children'),
+              Input('live-update-graph', 'figure'))
+def update_upSpeed(n):
+    global df
+    upSpeed = df['upload speed'][df.shape[0]-1]
+    style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
+    return [html.Span('Upload speed: {0:0.2f} mbps \t'.format(upSpeed), style = style)]
+
+@app.callback(Output('cur-ping', 'children'),
+              Input('live-update-graph', 'figure'))
+def update_ping(n):
+    global df
+    ping = df['ping'][df.shape[0]-1]
+    style = {'padding': '5px', 'fontSize': '20px', 'color': 'grey'}
+    return [html.Span('Ping: {0:0.2f} \t'.format(ping), style = style)]
 # if __name__ == '__main__':
 #     app.run_server(host='0.0.0.0', port=8050, debug= False)

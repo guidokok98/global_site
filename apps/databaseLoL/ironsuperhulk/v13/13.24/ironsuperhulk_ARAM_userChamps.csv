@@ -1,0 +1,5 @@
+champion_id,champion_name,played,won,kills,deaths,assists,average_damage_dealt,average_damage_taken,damage_diff,double_kills,triple_kills,quadra_kills,penta_kills,unreal_kills,average_healing_done,cc_score,winrate
+115,Ziggs,1.0,1,9,11,37,39492,35953,3539,0,0,0,0,0,4119,29,100
+112,Viktor,1.0,1,3,12,22,17225,20756,-3531,0,0,0,0,0,1635,30,100
+498,Xayah,1.0,1,9,13,17,22342,36399,-14057,1,0,0,0,0,7112,15,100
+110,Varus,1.0,0,10,10,9,24186,21328,2858,1,0,0,0,0,1851,43,0

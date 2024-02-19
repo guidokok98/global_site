@@ -2,7 +2,8 @@
 #!/usr/bin/python3
 sleep 1m
 sudo python3 /home/pi/repos/global_site/index.py > websiteLog.txt &
-sudo python3 /home/pi/repos/global_site/roomAnalyzerV2.py > roomAnalyzerLog.txt
+sudo python3 /home/pi/repos/global_site/roomAnalyzerV2.py > roomAnalyzerLog.txt &
+sudo python3 /home/pi/repos/global_site/nightTask.py
 #LoL&roomAnalyzer site
 #get_quatscreen(){
 #        byobu split-window -v
