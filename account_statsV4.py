@@ -3,7 +3,8 @@
 Created on Fri Jan 29 15:02:43 2021
 
 @author: guido
-
+To do:
+ - loadDf start df with all champs/maps
 """
 from riotwatcher import *
 import pandas as pd
@@ -37,12 +38,12 @@ def champ_dict():
     for key in static_champ_list['data']:
         row = static_champ_list['data'][key]
         champ_dict[row['key']] = row['id']
-    print('champs loaded')
+    # print('champs loaded')
     return champ_dict
 
 def lol_version():
     latest = watcher.data_dragon.versions_for_region('euw1')['n']['champion']
-    print("lol version: ",latest)
+    # print("lol version: ",latest)
     return latest
 #build up the map dictionary
 def map_dict():
@@ -52,7 +53,7 @@ def map_dict():
     for key in static_map_list['data']:
         row = static_map_list['data'][key]
         map_dict[row['MapId']] = row['MapName']
-    print('maps loaded')
+    # print('maps loaded')
     return map_dict
 
 
@@ -113,7 +114,16 @@ class player:
         self.userData = watcher.summoner.by_name(my_region, self.userName)
         self.direct = basedir+self.userName
         self.loadLastGame()
+        self.mkdir(self.direct)
+        self.mkdir(self.direct+"/all")
+        self.mkdir(self.direct+"/all"+"/all")
 
+
+    def mkdir(self, pth):
+        try:
+            os.makedirs(pth)
+        except:
+            None
     #load last game
     def loadLastGame(self):
         try:
@@ -121,15 +131,10 @@ class player:
             self.lastGame = file2write.read()
             file2write.close()
         except:
-            try:
-                os.makedirs(self.direct)
-                os.makedirs(self.direct+"/all")
-                os.makedirs(self.direct+"/all"+"/all")
-            except:
-                None
             self.lastGame = 0
     #saves the first game played
     def saveFirstGame(self):
+        # print("open: ", ""+self.direct+'/'+self.userName+"_lastgame.txt")
         self.firstMatchId =  self.matchesData[0]
         file2write=open(""+self.direct+'/'+self.userName+"_lastgame.txt",'w')
         file2write.write(str(self.firstMatchId))
@@ -138,7 +143,7 @@ class player:
     #loads the given Df
     def loadDf(self, dfName, version):
         try:
-            print("loadDf: ",self.direct+ "/v"+ version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv')
+            # print("loadDf: ",self.direct+ "/v"+ version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv')
             self.selectedDf = pd.read_csv(r''+self.direct+ "/v"+version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv')
         except:
             self.selectedDf = pd.DataFrame()
@@ -175,7 +180,7 @@ class player:
     #save one specific match
     def FmatchData(self, matchCode):
         self.gameId = matchCode
-        print("gameID: ", self.gameId)
+        # print("gameID: ", self.gameId)
         matchData = watcher.match.by_id(my_region, matchCode)
         self.matchData = matchData
     #sets the gameId
@@ -211,7 +216,7 @@ class player:
         while retry == True:
             try:
                 self.gameMode = self.matchDetails['gameMode']
-                print('gameVersion ', ".".join(self.matchDetails['gameVersion'].split(".")[0:2]))
+                # print('gameVersion ', ".".join(self.matchDetails['gameVersion'].split(".")[0:2]))
                 retry = False
             except:
                 time.sleep(60)
@@ -223,7 +228,7 @@ class player:
         while retry == True:
             try:
                 self.gameVersion = ".".join(self.matchDetails['gameVersion'].split(".")[0:2])
-                print('gameVersion ', ".".join(self.matchDetails['gameVersion'].split(".")[0:2]))
+                # print('gameVersion ', ".".join(self.matchDetails['gameVersion'].split(".")[0:2]))
                 retry = False
             except:
                 time.sleep(60)
@@ -423,7 +428,7 @@ class player:
         self.selectedDf=self.FaddVal('map', self.gameMode, 'won_with_first_inibitor', 0)
         self.selectedDf=self.FaddVal('map', self.gameMode, 'lost_with_first_inibitor', 0)
         self.selectedDf=self.FaddVal('map', self.gameMode, 'won_with_all', 0)
-        self.selectedDf=self.FaddVal('map', self.gameMode, 'lost with_all', 0)
+        self.selectedDf=self.FaddVal('map', self.gameMode, 'lost_with_all', 0)
         if self.userWon == True:
             self.selectedDf=self.FaddVal('map', self.gameMode, 'won', 1)
             if self.userTeam == self.firstBloodTeam:
@@ -626,36 +631,39 @@ class player:
 
 #main function
 def getStats(username):
-    global user
-    global curVersion
-    if curVersion != lol_version():
-        updateDicts()
-    doneMain = False
-    user = player(username)
-    user.FmatchesData()
-    for match in user.matchesData:
-        if doneMain == False:
-            try:
-                user.FmatchData(match)
-                # user.FgameId()
-                if user.gameId == user.lastGame:
-                    break;
-                print(f'gameId = {user.gameId}')
-                user.FmatchDetail()
-                user.FmatchMap()
-                user.FgameMode()
-                user.FgameVersion()
-                user.FmatchMap()
-                print(f'gamemode: {user.gameMode} \t map: {user.matchMap}')
-                user.FteamStats()
-                user.FplayersCycle()
-                user.FmapStats()
-                time.sleep(190/120)
-            except:
-                time.sleep(190/120)
-    user.saveFirstGame()
-    # user.FchampsInfo()
-    del user
+    try:
+        global user
+        global curVersion
+        if curVersion != lol_version():
+            updateDicts()
+        doneMain = False
+        user = player(username)
+        user.FmatchesData()
+        for match in user.matchesData:
+            if doneMain == False:
+                try:
+                    user.FmatchData(match)
+                    # user.FgameId()
+                    if user.gameId == user.lastGame:
+                        break;
+                    # print(f'gameId = {user.gameId}')
+                    user.FmatchDetail()
+                    user.FmatchMap()
+                    user.FgameMode()
+                    user.FgameVersion()
+                    user.FmatchMap()
+                    # print(f'gamemode: {user.gameMode} \t map: {user.matchMap}')
+                    user.FteamStats()
+                    user.FplayersCycle()
+                    user.FmapStats()
+                    time.sleep(190/120)
+                except:
+                    time.sleep(190/120)
+        user.saveFirstGame()
+        # user.FchampsInfo()
+        del user
+    except Exception as error:
+        print("failed! error: ", error)
 
 def updateDicts():
     global champ_dict, map_dict, my_region, curVersion
