@@ -73,6 +73,7 @@ class player:
     lastGame = None
     selectedDf = None
     dfName = None
+    dfNiv = None
     #participant data
     partData = None
     sumName = None
@@ -141,26 +142,39 @@ class player:
         file2write.close()
 
     #loads the given Df
-    def loadDf(self, dfName, version):
+    def loadDf(self, dfName, version, subversion):
+        if self.dfNiv == "all":
+            version = "all"
+            subversion = "all"
+        elif self.dfNiv == "version":
+            subversion = "all"
+        print("loading df: ",self.direct+ "/v"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
         try:
-            # print("loadDf: ",self.direct+ "/v"+ version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv')
-            self.selectedDf = pd.read_csv(r''+self.direct+ "/v"+version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv')
+            self.selectedDf = pd.read_csv(r''+self.direct+ "/v"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
         except:
+            print("loading failed")
             self.selectedDf = pd.DataFrame()
+        print("loaded: ",  self.selectedDf)
         return self.selectedDf
     #saves the given df
-    def saveDf(self, dfName, sort, version, ascending = False):
+    def saveDf(self, dfName, sort, version, subversion, ascending = False):
+        if self.dfNiv == "all":
+            version = "all"
+            subversion = "all"
+        elif self.dfNiv == "version":
+            subversion = "all"
+        print("saving: ",  self.selectedDf)
         try:
-            os.makedirs(self.direct+ "/v"+ version.split(".")[0]+'/'+version)
+            os.makedirs(self.direct+ "/v"+ version+'/'+subversion)
         except:
             None
         try:
-            os.makedirs(self.direct+ "/v"+ version.split(".")[0]+'/'+"all")
+            os.makedirs(self.direct+ "/v"+ version+'/'+"all")
         except:
             None
         saved = False
         self.selectedDf = self.selectedDf.sort_values(by=sort, ascending = ascending)
-        saveName = ''+self.direct+ "/v"+version.split(".")[0]+"/"+version+'/'+self.userName+'_'+dfName+'.csv'
+        saveName = ''+self.direct+ "/v"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv'
         while saved == False:
             try:
                 self.selectedDf.to_csv(saveName, index=False)
@@ -291,7 +305,7 @@ class player:
         self.FuserChampStats()
     #saves the champ stats of the user
     def FuserChampStats(self):
-        self.selectedDf = self.loadDf(self.gameMode+'_'+'userChamps', self.gameVersion)
+        self.selectedDf = self.loadDf(self.gameMode+'_'+'userChamps', self.gameVersion.split(".")[0], self.gameVersion)
         self.dfName = 'userChamps'
         self.userCampStats = self.matchDetails['participants'][self.userNbr]
         self.selectedDf =self.FaddVal('champion_name', self.userChamp, 'played', 1)
@@ -316,7 +330,7 @@ class player:
         totWon = self.FreadDf(self.selectedDf,'champion_name', self.userChamp, 'won')
         winRate = round(((totWon/totPlayed)*100.),2)
         self.selectedDf = self.FoverwriteVal('champion_name', self.userChamp, 'winrate', winRate)
-        self.saveDf((self.gameMode+'_'+'userChamps'),userChampsSort, self.gameVersion)
+        self.saveDf((self.gameMode+'_'+'userChamps'),userChampsSort, self.gameVersion.split(".")[0], self.gameVersion)
 
     #players
     #cycle through the players in the match
@@ -365,7 +379,7 @@ class player:
     #relationship between user and player
     def FplayerUserRel(self):
         self.dfName = 'summoners'
-        self.selectedDf = self.loadDf(self.gameMode+'_'+'summoners', self.gameVersion)
+        self.selectedDf = self.loadDf(self.gameMode+'_'+'summoners', self.gameVersion.split(".")[0], self.gameVersion)
         if self.sameTeam == True:
             self.selectedDf = self.FaddVal('summoner_name', self.sumName, 'played_with', 1)
             self.selectedDf = self.FaddVal('summoner_name', self.sumName, 'won_with', 0)
@@ -386,12 +400,12 @@ class player:
         date = str(t.tm_mday)+'-'+str(t.tm_mon)+'-'+str(t.tm_year)+' '+str(t.tm_hour)+':'+str(t.tm_min)
         self.selectedDf = self.FoverwriteVal('summoner_name', self.sumName, 'date', date)
         self.selectedDf = self.FoverwriteVal('summoner_name', self.sumName, 'last_played', self.playerChamp)
-        self.saveDf((self.gameMode+'_'+'summoners'), summonersSort, self.gameVersion)
+        self.saveDf((self.gameMode+'_'+'summoners'), summonersSort, self.gameVersion.split(".")[0], self.gameVersion)
     #get stats with or against the champs the user wins with or loses
     def FchampsStats(self):
         global totPlayed, totWon
         self.dfName = 'champStats'
-        self.selectedDf = self.loadDf(self.gameMode+'_'+'champStats', self.gameVersion)
+        self.selectedDf = self.loadDf(self.gameMode+'_'+'champStats', self.gameVersion.split(".")[0], self.gameVersion)
         if self.sameTeam == True:
             self.selectedDf=self.FaddVal('champion_name', self.playerChamp, 'played_with', 1)
             self.selectedDf=self.FaddVal('champion_name', self.playerChamp, 'won_with', 0)
@@ -411,12 +425,12 @@ class player:
         winRate = round(((totWon/totPlayed)*100.),2)
         self.selectedDf = self.FoverwriteVal('champion_name', self.playerChamp, 'winrate', winRate)
         self.selectedDf = self.FoverwriteVal('champion_name', self.playerChamp, 'tot_played', totPlayed)
-        self.saveDf((self.gameMode+'_'+'champStats'), champStatsSort, self.gameVersion)
+        self.saveDf((self.gameMode+'_'+'champStats'), champStatsSort, self.gameVersion.split(".")[0], self.gameVersion)
     #map
     #get map stats
     def FmapStats(self):
         self.dfName = 'mapStats'
-        self.selectedDf = self.loadDf('mapStats', self.gameVersion)
+        self.selectedDf = self.loadDf('mapStats', self.gameVersion.split(".")[0], self.gameVersion)
         self.selectedDf= self.FaddVal('map', self.gameMode, 'played', 1)
         self.selectedDf=self.FaddVal('map', self.gameMode, 'won', 0)
         self.selectedDf=self.FaddVal('map', self.gameMode, 'won_with_first_blood', 0)
@@ -463,11 +477,11 @@ class player:
             print(f'\n cant calculate winrate: {totPlayed}, {totWon} \n')
             winRate =-1
         self.selectedDf = self.FoverwriteVal('map', self.gameMode, 'winrate', winRate)
-        self.saveDf('mapStats', mapStatsSort, self.gameVersion)
+        self.saveDf('mapStats', mapStatsSort, self.gameVersion.split(".")[0], self.gameVersion)
 
     def FchampsInfo(self):
         self.dfName = 'champsInfo'
-        self.selectedDf = self.loadDf('champsInfo', self.gameVersion)
+        self.selectedDf = self.loadDf('champsInfo', self.gameVersion.split(".")[0], self.gameVersion)
         self.FchampInfo()
         for champ in self.champInfo:
             self.champId = champ['championId']
@@ -485,7 +499,7 @@ class player:
             self.selectedDf = self.FoverwriteVal('champion_name', self.champName, 'tokens_earned', self.tokensEarned)
             self.selectedDf = self.FoverwriteVal('champion_name', self.champName, 'chest_granted', self.chestGranted)
 
-        self.saveDf('champsInfo', champsInfoSort, self.gameVersion)
+        self.saveDf('champsInfo', champsInfoSort, self.gameVersion.split(".")[0], self.gameVersion)
 
     #functions to edit database
     #add value to the cell, if not excist make a new row
@@ -636,27 +650,32 @@ def getStats(username):
         global curVersion
         if curVersion != lol_version():
             updateDicts()
-        doneMain = False
         user = player(username)
         user.FmatchesData()
         for match in user.matchesData:
-            if doneMain == False:
+            doneMain = False
+            while doneMain == False:
                 try:
                     user.FmatchData(match)
                     # user.FgameId()
+                    print(f'gameId = {user.gameId}')
                     if user.gameId == user.lastGame:
                         break;
-                    # print(f'gameId = {user.gameId}')
                     user.FmatchDetail()
-                    user.FmatchMap()
-                    user.FgameMode()
-                    user.FgameVersion()
-                    user.FmatchMap()
-                    # print(f'gamemode: {user.gameMode} \t map: {user.matchMap}')
-                    user.FteamStats()
-                    user.FplayersCycle()
-                    user.FmapStats()
-                    time.sleep(190/120)
+                    #loop here through the big files
+                    for dfNiv in ["all", "version", "subversion"]:
+                        user.dfNiv = dfNiv
+                        user.FmatchMap()
+                        user.FgameMode()
+                        user.FgameVersion()
+                        user.FmatchMap()
+                        print(f'gamemode: {user.gameMode} \t map: {user.matchMap}')
+                        user.FteamStats()
+                        user.FplayersCycle()
+                        user.FmapStats()
+                        time.sleep(190/120)
+                    
+                    doneMain = True
                 except:
                     time.sleep(190/120)
         user.saveFirstGame()
@@ -678,4 +697,5 @@ def updateDicts():
         None
 
 updateDicts()
+print("dicts updated")
 getStats('ironsuperhulk')
