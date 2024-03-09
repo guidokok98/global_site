@@ -14,9 +14,12 @@ from mh_z19c import *
 from sds011 import *
 from internetSpeedTester import *
 
-def tryXpect(function, params):
+def tryXpect(function, params = []):
     try:
-        return function(params)
+        if params == []:
+            return function()
+        else:
+            return function(params)
     except:
         return "error"
 #converts time from epoch to date and Hours Minutes and Seconds
@@ -80,12 +83,9 @@ def localTemp():
 
 path = str(Path(__file__).parent.absolute())
 path = path+'/apps/database_roomAnalyzer'
-bme680 = bme680(0x77)
-co2Sensor = mh_z19c()
-try:
-	dustSensor = sds011()
-except:
-	dustSensor = 'error'
+bme680 = tryXpect(bme680, [0x77])
+co2Sensor = tryXpect(mh_z19c)
+dustSensor = tryXpect(sds011)
 #set sensor in force mode
 bme680.setBitHigh(0x74, 0)
 while((bme680.readReg(0x1D)&0b100000) == 1):

@@ -60,7 +60,7 @@ class bme680:
 
     #when new class object is made, set temp,humi and press oversampling on 8 and IIR filter on 3
     def __init__(self, adress):
-        self.addr = adress
+        self.addr = adress[0]
         self.tempOversampling8()
         self.humiOversampling8()
         self.pressOversampling8()
