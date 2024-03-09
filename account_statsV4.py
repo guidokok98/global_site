@@ -148,13 +148,15 @@ class player:
             subversion = "all"
         elif self.dfNiv == "version":
             subversion = "all"
-        print("loading df: ",self.direct+ "/v"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
+        else:
+            version = "/v"+version
+        print("loading df: ",self.direct+ version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
         try:
-            self.selectedDf = pd.read_csv(r''+self.direct+ "/v"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
+            self.selectedDf = pd.read_csv(r''+self.direct+ version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
         except:
             print("loading failed")
             self.selectedDf = pd.DataFrame()
-        print("loaded: ",  self.selectedDf)
+        # print("loaded: ",  self.selectedDf)
         return self.selectedDf
     #saves the given df
     def saveDf(self, dfName, sort, version, subversion, ascending = False):
@@ -163,18 +165,20 @@ class player:
             subversion = "all"
         elif self.dfNiv == "version":
             subversion = "all"
-        print("saving: ",  self.selectedDf)
+        else:
+            version = "/v"+version
+        # print("saving: ",  self.selectedDf)
         try:
-            os.makedirs(self.direct+ "/v"+ version+'/'+subversion)
+            os.makedirs(self.direct+ version+'/'+subversion)
         except:
             None
         try:
-            os.makedirs(self.direct+ "/v"+ version+'/'+"all")
+            os.makedirs(self.direct+ version+'/'+"all")
         except:
             None
         saved = False
         self.selectedDf = self.selectedDf.sort_values(by=sort, ascending = ascending)
-        saveName = ''+self.direct+ "/v"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv'
+        saveName = ''+self.direct+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv'
         while saved == False:
             try:
                 self.selectedDf.to_csv(saveName, index=False)
