@@ -11,6 +11,7 @@ import pandas as pd
 import time
 import os
 from pathlib import Path
+from dfCombiner import *
 
 #define your self
 api_key = 'RGAPI-0f24618e-f080-457f-852d-bab56dc3b4cd'  #api key from riot from https://developer.riotgames.com/
@@ -56,6 +57,26 @@ def map_dict():
     # print('maps loaded')
     return map_dict
 
+def folderScan(givenPath, csvDB):
+    """
+    scans through the given path and do tasks
+    """
+    try:
+        for file in os.listdir(givenPath):
+            # Inisiating the path of the file
+            file_path = f"{givenPath}/{file}"
+            # Check if file is a folder, if so go in that folder
+            if os.path.isdir(file_path):
+                newPath = givenPath + "/" + file
+                csvDB = folderScan(newPath, csvDB)
+
+            # check if file is a file, if so copy that file
+            elif (file.endswith(".csv")):
+                csvDB.append(file_path)
+    #if there is an error, save it in txt file
+    except Exception as error:
+        print("path problem: ", str(error))
+    return csvDB
 
 class player:
     #info about the match
@@ -115,12 +136,13 @@ class player:
         self.userData = watcher.summoner.by_name(my_region, self.userName)
         self.direct = basedir+self.userName
         self.loadLastGame()
-        self.mkdir(self.direct)
-        self.mkdir(self.direct+"/all")
-        self.mkdir(self.direct+"/all"+"/all")
+        # self.mkdir(self.direct)
+        # self.mkdir(self.direct+"/all")
+        # self.mkdir(self.direct+"/all"+"/all")
 
 
     def mkdir(self, pth):
+        print("making path: ", pth)
         try:
             os.makedirs(pth)
         except:
@@ -146,17 +168,25 @@ class player:
         if self.dfNiv == "all":
             version = "all"
             subversion = "all"
+            loadFromPath = self.direct+"/"
         elif self.dfNiv == "version":
             subversion = "all"
+            version = "v"+version
+            loadFromPath = self.direct+"/"+version+"/"
         else:
-            version = "/v"+version
-        print("loading df: ",self.direct+ version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
+            version = "v"+version
+        # print("loading df: ",self.direct+"/"+ version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
         try:
-            self.selectedDf = pd.read_csv(r''+self.direct+ version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
+            self.selectedDf = pd.read_csv(r''+self.direct+"/"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv')
         except:
-            print("loading failed")
-            self.selectedDf = pd.DataFrame()
-        # print("loaded: ",  self.selectedDf)
+            if self.dfNiv == "all" or self.dfNiv == "all":
+                self.mkdir(self.direct+"/"+ version+"/"+subversion+'/')
+                print("loading failed")
+                csvDB = folderScan(loadFromPath,[])
+                self.selectedDf = dfCombiner(csvDB, dfName.split("_")[-2], dfName.split("_")[-1])
+            else:
+                self.selectedDf = pd.DataFrame()
+        # print("loaded: \n",  self.selectedDf)
         return self.selectedDf
     #saves the given df
     def saveDf(self, dfName, sort, version, subversion, ascending = False):
@@ -164,21 +194,23 @@ class player:
             version = "all"
             subversion = "all"
         elif self.dfNiv == "version":
+            version = "v"+version
             subversion = "all"
         else:
-            version = "/v"+version
+            version = "v"+version
         # print("saving: ",  self.selectedDf)
         try:
-            os.makedirs(self.direct+ version+'/'+subversion)
+            os.makedirs(self.direct+"/"+version+'/'+subversion)
         except:
             None
         try:
-            os.makedirs(self.direct+ version+'/'+"all")
+            os.makedirs(self.directself.dfNiv+ version+'/'+"all")
         except:
             None
         saved = False
         self.selectedDf = self.selectedDf.sort_values(by=sort, ascending = ascending)
-        saveName = ''+self.direct+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv'
+        saveName = r''+self.direct+"/"+version+"/"+subversion+'/'+self.userName+'_'+dfName+'.csv'
+        # print("saving df: ",saveName)
         while saved == False:
             try:
                 self.selectedDf.to_csv(saveName, index=False)
@@ -658,30 +690,31 @@ def getStats(username):
         user.FmatchesData()
         for match in user.matchesData:
             doneMain = False
-            while doneMain == False:
-                try:
-                    user.FmatchData(match)
-                    # user.FgameId()
-                    print(f'gameId = {user.gameId}')
-                    if user.gameId == user.lastGame:
-                        break;
-                    user.FmatchDetail()
-                    #loop here through the big files
-                    for dfNiv in ["all", "version", "subversion"]:
-                        user.dfNiv = dfNiv
-                        user.FmatchMap()
-                        user.FgameMode()
-                        user.FgameVersion()
-                        user.FmatchMap()
-                        print(f'gamemode: {user.gameMode} \t map: {user.matchMap}')
-                        user.FteamStats()
-                        user.FplayersCycle()
-                        user.FmapStats()
-                        time.sleep(190/120)
-                    
-                    doneMain = True
-                except:
+            # while doneMain == False:
+            try:
+                user.FmatchData(match)
+                # user.FgameId()
+                print(f'gameId = {user.gameId}')
+                if user.gameId == user.lastGame:
+                    break;
+                user.FmatchDetail()
+                #loop here through the big files
+                for dfNiv in ["subversion", "version", "all"]: #
+                    print("doing: ",dfNiv)
+                    user.dfNiv = dfNiv
+                    user.FmatchMap()
+                    user.FgameMode()
+                    user.FgameVersion()
+                    user.FmatchMap()
+                    print(f'gamemode: {user.gameMode} \t map: {user.matchMap}')
+                    user.FteamStats()
+                    user.FplayersCycle()
+                    user.FmapStats()
                     time.sleep(190/120)
+                
+                doneMain = True
+            except:
+                time.sleep(190/120)
         user.saveFirstGame()
         # user.FchampsInfo()
         del user
